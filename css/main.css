@@ -30,7 +30,7 @@ body {
   height: 100vh;
   display: flex;
   flex-direction: column;
-  overflow: hidden;
+  /*overflow: hidden;*/
 }
 
 header {
@@ -324,4 +324,9 @@ input {
   .weather-forecast { grid-column: 1; grid-row: auto; height: 120px; }
   .seeds            { grid-column: 1; grid-row: auto; height: 150px; }
   .right-bottom     { grid-column: 1; grid-row: auto; height: auto; }
+}
+
+
+.is-hidden {
+    display: none !important;
 }
