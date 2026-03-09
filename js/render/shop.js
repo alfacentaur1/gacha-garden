@@ -1,4 +1,4 @@
-import { PACKS_CONFIG } from './packsConfig.js';
+import { PACKS_CONFIG } from '../config/packsConfig.js';
 import { renderGame } from './renderGame.js'; 
 
 export function renderShop(container) {

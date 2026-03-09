@@ -1,5 +1,5 @@
-import { PLANTS_CONFIG } from './plantsConfig.js';
-import { renderGame } from './game.js';
+import { PLANTS_CONFIG } from '../config/plantsConfig.js';
+import { renderGame } from '../game.js';
 
 export function renderLexicon(container) {
     container.innerHTML = '';

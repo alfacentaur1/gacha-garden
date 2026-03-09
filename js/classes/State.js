@@ -2,6 +2,7 @@
 //includes user's data :)
 
 export default class State{
+    static _instance = null;
     constructor(){
         //using singleton, to prevent multiple states running 
         if (State._instance) {
@@ -43,8 +44,16 @@ export default class State{
             plot2: {
                 full: false,
                 plants:[]
-            },
+            }
         }
+        State._instance = this;
+    }
+
+static get instance() {
+        if (!State._instance) {
+            new State(); 
+        }
+        return State._instance;
     }
 }
 

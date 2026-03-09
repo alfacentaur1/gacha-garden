@@ -1,4 +1,4 @@
-import { PLANTS_CONFIG as P } from "./plantsConfig";
+import { PLANTS_CONFIG as P } from "./plantsConfig.js";
 
 export const PACKS_CONFIG = {
   STARTER: {

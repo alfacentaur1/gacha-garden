@@ -1,28 +1,28 @@
-import State from './state.js';
+import State from '../state.js';
 
-//container is anchor for SPA
 export function renderGame(container) {
-    const state = State._instance;
+    const state = State.instance;
     container.innerHTML = '';
 
     const mainPage = document.createElement('main');
     mainPage.classList.add('layout');
     mainPage.id = 'page-game';
 
-    mainPage.appendChild(createDashboard(state));
+    mainPage.appendChild(createDashboard(state, container));
     mainPage.appendChild(createFields(state));
     mainPage.appendChild(createWeather(state));
     mainPage.appendChild(createSeeds(state));
-    mainPage.appendChild(createRightBottom(state));
+    mainPage.appendChild(createRightBottom(state, container));
 
     container.appendChild(mainPage);
 }
 
-function createDashboard(state) {
+function createDashboard(state, container) {
     const aside = document.createElement('aside');
     aside.classList.add('dashboard');
+    let sanitizedName = sanitize(state.user.name);
     aside.innerHTML = `
-        <p>Gardeners electronic diary</p>
+        <p> ${sanitizedName}'s electronic diary</p>
         <section class="statistics">
             <p>Statistics</p>
             <div class="stat-item">Money: $${state.user.money}</div>
@@ -39,11 +39,19 @@ function createDashboard(state) {
                 ${'<button class="trader-item"></button>'.repeat(3)}
             </div>
         </section>
-        <section class="lemonstand">
+        <section class="lemonstand" style="cursor: pointer">
             <p id="sell-lemonade">click to sell lemonade</p>
             <img src="/img/lemonstand.png" alt="Lemon stand">
         </section>
     `;
+
+    aside.querySelector('.lemonstand').addEventListener('click', () => {
+        state.user.money += 1;
+        state.user.moneyMade += 1;
+        state.user.lemonadeSold += 1;
+        renderGame(container);
+    });
+
     return aside;
 }
 
@@ -87,7 +95,7 @@ function createSeeds(state) {
     return section;
 }
 
-function createRightBottom(state) {
+function createRightBottom(state, container) {
     const div = document.createElement('div');
     div.classList.add('right-bottom');
     div.innerHTML = `
@@ -99,9 +107,31 @@ function createRightBottom(state) {
         </section>
         <section class="input-section">
             <p>What's your name, gardener?</p>
-            <input type="text" placeholder="${state.user.name || 'John Smith'}">
+            <input type="text" id="name-input" placeholder="Hmmm...">
             <button class="save-name">Save</button>
         </section>
     `;
+
+    div.querySelector('.save-name').addEventListener('click', () => {
+        const input = div.querySelector('#name-input');
+        if (input.value.trim() !== "") {
+            state.user.name = input.value;
+            renderGame(container);
+        }
+    });
+
     return div;
+}
+
+function sanitize(str) {
+    const map = {
+        '&': '&amp;',
+        '<': '&lt;',
+        '>': '&gt;',
+        '"': '&quot;',
+        "'": '&#x27;',
+        "/": '&#x2F;',
+    };
+    const reg = /[&<>"'/]/ig;
+    return str.replace(reg, (match) => map[match]);
 }
