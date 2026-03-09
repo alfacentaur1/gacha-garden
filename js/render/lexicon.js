@@ -1,15 +1,13 @@
 import { PLANTS_CONFIG } from '../config/plantsConfig.js';
-import { renderGame } from './game.js';
-import { renderShop } from './shop.js';
 
 export function renderLexicon(container) {
     container.innerHTML = `
         <main id="page-lexicon">
             <header class="shop-header">
-                <button class="back-btn">← Back</button>
+                <button class="back-btn">Back</button>
                 <nav class="shop-tabs">
                     <button class="tab" id="go-to-shop">Seed Shop</button>
-                    <button class="tab active">Lexicon</button>
+                    <button class="tab active" id="go-to-lexicon">Lexicon</button>
                 </nav>
             </header>
             <section class="lexicon-grid"></section>
@@ -22,26 +20,31 @@ export function renderLexicon(container) {
         grid.appendChild(createLexiconCard(plant));
     });
 
-    
 }
 
 function createLexiconCard(plant) {
     const article = document.createElement('article');
-    article.classList.add('lexicon-card', plant.rarity.toLowerCase());
+    article.classList.add('lexicon-item', plant.rarity.toLowerCase());
 
-    article.innerHTML = `
-        <div class="lexicon-img-container">
-            <span class="lexicon-emoji">${getPlantEmoji(plant.name)}</span>
-        </div>
-        <div class="lexicon-details">
-            <h3 class="plant-name">${plant.name}</h3>
-            <span class="rarity-tag">${plant.rarity.toUpperCase()}</span>
-            <div class="plant-stats">
-                <p>🕒 Growth: <strong>${plant.growthTime}s</strong></p>
-                <p>💰 Sell: <strong>$${plant.sellPrice}</strong></p>
+    const rarityClass = `rarity-${plant.rarity.toLowerCase()}`;
+
+article.innerHTML = `
+        <span class="lexicon-icon">${getPlantEmoji(plant.name)}</span>
+        <h3 class="lexicon-name">${plant.name}</h3>
+        <span class="lexicon-rarity ${rarityClass}">${plant.rarity.toUpperCase()}</span>
+        
+        <div class="lexicon-stats">
+            <div class="lexicon-stat">
+                <dt>Growth</dt>
+                <dd>${plant.growthTime}s</dd>
+            </div>
+            <div class="lexicon-stat">
+                <dt>Sell</dt>
+                <dd>$${plant.sellPrice}</dd>
             </div>
         </div>
     `;
+    return article;
     return article;
 }
 function getPlantEmoji(name) {

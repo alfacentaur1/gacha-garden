@@ -29,7 +29,7 @@ function createDashboard(state, container) {
             <div class="stat-item">Lemonade sold: ${state.user.lemonadeSold}</div>
             <div class="stat-item">Money made: $${state.user.moneyMade}</div>
         </section>
-        <nav class="nav">
+        <nav class="nav" id="nav">
             <p>seed shop and lexicon</p>
         </nav>
         <section class="trader">
@@ -55,7 +55,7 @@ function createDashboard(state, container) {
     return aside;
 }
 
-function createFields(state) {
+function createFields() {
     const section = document.createElement('section');
     section.classList.add('fields-container');
     for (let i = 0; i < 2; i++) {
