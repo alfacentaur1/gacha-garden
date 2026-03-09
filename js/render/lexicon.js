@@ -12,9 +12,42 @@ export function renderLexicon(container) {
                     <button class="tab active">Lexicon</button>
                 </nav>
             </header>
-            <section class="lexicon-grid">
-                </section>
+            <section class="lexicon-grid"></section>
         </main>
     `;
 
+    const grid = container.querySelector('.lexicon-grid');
+
+    Object.values(PLANTS_CONFIG).forEach(plant => {
+        grid.appendChild(createLexiconCard(plant));
+    });
+
+    
+}
+
+function createLexiconCard(plant) {
+    const article = document.createElement('article');
+    article.classList.add('lexicon-card', plant.rarity.toLowerCase());
+
+    article.innerHTML = `
+        <div class="lexicon-img-container">
+            <span class="lexicon-emoji">${getPlantEmoji(plant.name)}</span>
+        </div>
+        <div class="lexicon-details">
+            <h3 class="plant-name">${plant.name}</h3>
+            <span class="rarity-tag">${plant.rarity.toUpperCase()}</span>
+            <div class="plant-stats">
+                <p>🕒 Growth: <strong>${plant.growthTime}s</strong></p>
+                <p>💰 Sell: <strong>$${plant.sellPrice}</strong></p>
+            </div>
+        </div>
+    `;
+    return article;
+}
+function getPlantEmoji(name) {
+    const emojis = { 
+        'Tomato': '🍅', 'Wheat': '🌾', 'Pepper': '🌶️', 
+        'Orange': '🍊', 'Banana': '🍌', 'Mushroom': '🍄' 
+    };
+    return emojis[name] || '🌱';
 }
