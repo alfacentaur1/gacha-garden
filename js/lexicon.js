@@ -1,70 +1,43 @@
-import { PACKS_CONFIG } from './packsConfig.js';
-import { renderGame } from './renderGame.js'; 
+import { PLANTS_CONFIG } from './plantsConfig.js';
+import { renderGame } from './game.js';
 
-export function renderShop(container) {
+export function renderLexicon(container) {
     container.innerHTML = '';
 
-    const shopPage = document.createElement('main');
-    shopPage.id = 'page-shop';
+    const lexiconPage = document.createElement('main');
+    lexiconPage.id = 'page-lexicon';
 
     const header = document.createElement('header');
     header.classList.add('shop-header');
     header.innerHTML = `
         <button class="back-btn">← Back</button>
-        <nav class="shop-tabs">
-            <button class="tab active">Seed Shop</button>
-            <button class="tab">Lexicon</button>
-        </nav>
+        <h2 class="lexicon-title">Plant Lexicon</h2>
     `;
-
-    header.querySelector('.back-btn').addEventListener('click', () => {
-        renderGame(container);
-    });
-
-    const section = document.createElement('section');
-    section.classList.add('packs-section');
-    section.id = 'tab-seeds';
 
     const grid = document.createElement('div');
-    grid.classList.add('packs-grid');
+    grid.classList.add('lexicon-grid');
 
-    Object.values(PACKS_CONFIG).forEach(packData => {
-        grid.appendChild(createPackCard(packData));
+    Object.values(PLANTS_CONFIG).forEach(plant => {
+        const card = document.createElement('article');
+        card.classList.add('lexicon-card', plant.rarity.toLowerCase());
+
+        card.innerHTML = `
+            <div class="lexicon-img-container">
+                <img src="/img/${plant.image}" alt="${plant.name}" class="lexicon-img">
+            </div>
+            <div class="lexicon-details">
+                <h3 class="plant-name">${plant.name}</h3>
+                <span class="rarity-tag">${plant.rarity.toUpperCase()}</span>
+                <div class="plant-stats">
+                    <p>🕒 Growth: <strong>${plant.growthTime}m</strong></p>
+                    <p>💰 Sell Price: <strong>$${plant.sellPrice}</strong></p>
+                </div>
+            </div>
+        `;
+        grid.appendChild(card);
     });
 
-    section.appendChild(grid);
-    shopPage.appendChild(header);
-    shopPage.appendChild(section);
-
-
-    container.appendChild(shopPage);
-}
-
-
-function createPackCard(pack) {
-    const article = document.createElement('article');
-    article.classList.add('pack');
-
-    const chancesHTML = pack.loot.map(item => `
-        <li class="chance-row ${item.plant.rarity.toLowerCase()}">
-            <span>${getPlantEmoji(item.plant.name)} ${item.plant.name}</span>
-            <span class="rarity">${item.chance}%</span>
-        </li>
-    `).join('');
-
-    article.innerHTML = `
-        <span class="pack-icon">${pack.icon}</span>
-        <h3 class="pack-name">${pack.name}</h3>
-        <ul class="pack-chances">
-            ${chancesHTML}
-        </ul>
-        <button class="buy-btn" data-id="${pack.id}">Buy — $${pack.price}</button>
-    `;
-
-    return article;
-}
-
-function getPlantEmoji(name) {
-    const emojis = { 'Tomato': '🍅', 'Wheat': '🌾', 'Pepper': '🌶️', 'Orange': '🍊', 'Banana': '🍌', 'Mushroom': '🍄' };
-    return emojis[name] || '🌱';
+    lexiconPage.appendChild(header);
+    lexiconPage.appendChild(grid);
+    container.appendChild(lexiconPage);
 }
