@@ -2,6 +2,7 @@
 import { renderGame } from './game.js';
 import { renderLexicon } from './lexicon.js';
 import { renderShop } from './shop.js';
+import loop from './loop.js';
 
 const appContainer = document.getElementById('app');
 
@@ -10,7 +11,6 @@ function navigate(page, renderFunc) {
     const currentPage = currentState ? currentState.page : 'game';
     //anti spam for nav
     if (currentPage === page) {
-        console.log(`Navigace ignorována: Již jsi na stránce ${page}`);
         return;
     }
     //push new state to history and render page
@@ -56,3 +56,10 @@ history.replaceState({ page: initialPage }, '', `#${initialPage}`);
 if (initialPage === 'shop') renderShop(appContainer);
 else if (initialPage === 'lexicon') renderLexicon(appContainer);
 else renderGame(appContainer);
+
+loop();
+
+
+
+
+

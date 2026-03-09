@@ -104,7 +104,6 @@ header {
   display: flex;
   flex-direction: column;
   gap: 4px;
-  flex: 1;
 }
 
 .trader img {
@@ -123,6 +122,11 @@ header {
   flex: 1;
   background: #ede8e0;
   border: 1px solid #a09880;
+}
+
+.trader-item:hover {
+  background: #c4bdb2;
+  cursor: pointer;
 }
 
 .lemonstand {
@@ -300,12 +304,14 @@ input {
 
 .tool {
   flex: 1;
-  background: #d6cfc4;
-  border: 1px solid #a09880;
   display: flex;
   justify-content: center;
   align-items: center;
   max-width: 20%;
+}
+.tool:hover {
+  background: #c4bdb2;
+  cursor: pointer;
 }
 
 

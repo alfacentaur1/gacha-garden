@@ -34,9 +34,9 @@ function createDashboard(state, container) {
         </nav>
         <section class="trader">
             <p>trader</p>
-            <img src="img/trader.png" alt="trader-img">
+            <p>watering can - $1500</p>
             <div class="trader-container">
-                ${'<button class="trader-item"></button>'.repeat(3)}
+                <img src="img/watering_can.png" alt="trader item" class="trader-item">
             </div>
         </section>
         <section class="lemonstand" style="cursor: pointer">
@@ -49,6 +49,11 @@ function createDashboard(state, container) {
         state.user.money += 1;
         state.user.moneyMade += 1;
         state.user.lemonadeSold += 1;
+        renderGame(container);
+    });
+
+    aside.querySelector('.trader-item').addEventListener('click', () => {
+        state.user.inventory.itemInventory.wateringCan += 1;
         renderGame(container);
     });
 
@@ -102,7 +107,7 @@ function createRightBottom(state, container) {
         <section class="tools">
             <p>Tools</p>
             <div class="tools-container">
-                ${'<button class="tool"></button>'.repeat(3)}
+                ${'<img src="img/watering_can.png" alt="tool" class="tool">'}
             </div>
         </section>
         <section class="input-section">
