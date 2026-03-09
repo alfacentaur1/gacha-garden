@@ -1,5 +1,4 @@
 export default class Pack {
-    _ready = false;
     constructor(name, price, plants){
         this.name = name;
         this.price = price;
@@ -14,4 +13,15 @@ export default class Pack {
         this._ready = value;
     }
 
+    //distribution function
+    openPack() {
+        const totalChance = this.plants.reduce((sum, plant) => sum + plant.chance, 0);
+        const randomChance = Math.random() * totalChance;
+        let cumulativeChance = 0;
+        for (const plant of this.plants) {
+            cumulativeChance += plant.chance;
+            if (randomChance < cumulativeChance) {
+                return plant.plant;
+            }   
+    }}
 }
