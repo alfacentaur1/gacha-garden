@@ -1,43 +1,56 @@
 import { PLANTS_CONFIG } from '../config/plantsConfig.js';
-import { renderGame } from '../game.js';
 
 export function renderLexicon(container) {
-    container.innerHTML = '';
-
-    const lexiconPage = document.createElement('main');
-    lexiconPage.id = 'page-lexicon';
-
-    const header = document.createElement('header');
-    header.classList.add('shop-header');
-    header.innerHTML = `
-        <button class="back-btn">← Back</button>
-        <h2 class="lexicon-title">Plant Lexicon</h2>
+    container.innerHTML = `
+        <main id="page-lexicon">
+            <header class="shop-header">
+                <button class="back-btn">Back</button>
+                <nav class="shop-tabs">
+                    <button class="tab" id="go-to-shop">Seed Shop</button>
+                    <button class="tab active" id="go-to-lexicon">Lexicon</button>
+                </nav>
+            </header>
+            <section class="lexicon-grid"></section>
+        </main>
     `;
 
-    const grid = document.createElement('div');
-    grid.classList.add('lexicon-grid');
+    const grid = container.querySelector('.lexicon-grid');
 
     Object.values(PLANTS_CONFIG).forEach(plant => {
-        const card = document.createElement('article');
-        card.classList.add('lexicon-card', plant.rarity.toLowerCase());
-
-        card.innerHTML = `
-            <div class="lexicon-img-container">
-                <img src="/img/${plant.image}" alt="${plant.name}" class="lexicon-img">
-            </div>
-            <div class="lexicon-details">
-                <h3 class="plant-name">${plant.name}</h3>
-                <span class="rarity-tag">${plant.rarity.toUpperCase()}</span>
-                <div class="plant-stats">
-                    <p>🕒 Growth: <strong>${plant.growthTime}m</strong></p>
-                    <p>💰 Sell Price: <strong>$${plant.sellPrice}</strong></p>
-                </div>
-            </div>
-        `;
-        grid.appendChild(card);
+        grid.appendChild(createLexiconCard(plant));
     });
 
-    lexiconPage.appendChild(header);
-    lexiconPage.appendChild(grid);
-    container.appendChild(lexiconPage);
+}
+
+function createLexiconCard(plant) {
+    const article = document.createElement('article');
+    article.classList.add('lexicon-item', plant.rarity.toLowerCase());
+
+    const rarityClass = `rarity-${plant.rarity.toLowerCase()}`;
+
+article.innerHTML = `
+        <span class="lexicon-icon">${getPlantEmoji(plant.name)}</span>
+        <h3 class="lexicon-name">${plant.name}</h3>
+        <span class="lexicon-rarity ${rarityClass}">${plant.rarity.toUpperCase()}</span>
+        
+        <div class="lexicon-stats">
+            <div class="lexicon-stat">
+                <dt>Growth</dt>
+                <dd>${plant.growthTime}s</dd>
+            </div>
+            <div class="lexicon-stat">
+                <dt>Sell</dt>
+                <dd>$${plant.sellPrice}</dd>
+            </div>
+        </div>
+    `;
+    return article;
+    return article;
+}
+function getPlantEmoji(name) {
+    const emojis = { 
+        'Tomato': '🍅', 'Wheat': '🌾', 'Pepper': '🌶️', 
+        'Orange': '🍊', 'Banana': '🍌', 'Mushroom': '🍄' 
+    };
+    return emojis[name] || '🌱';
 }

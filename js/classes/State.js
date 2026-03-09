@@ -8,11 +8,6 @@ export default class State{
         if (State._instance) {
             return State._instance;
             }
-
-        this.ui = {
-            currentPage: 'home',
-            currentTab: 'home'
-        }
         this.user = {
             name: 'Player',
             money: 1000,
