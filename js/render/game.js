@@ -36,7 +36,7 @@ function createDashboard(state, container) {
             <p>trader</p>
             <p>watering can - $1500</p>
             <div class="trader-container">
-                <img src="img/watering_can.png" alt="trader item" class="trader-item">
+                <img src="img/watering_can.png" alt="trader item" class="trader-item" draggable="false">
             </div>
         </section>
         <section class="lemonstand" style="cursor: pointer">
