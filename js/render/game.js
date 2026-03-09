@@ -1,4 +1,4 @@
-import State from '../state.js';
+import State from '../classes/State.js';
 
 export function renderGame(container) {
     const state = State.instance;
