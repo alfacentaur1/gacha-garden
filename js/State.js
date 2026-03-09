@@ -1,3 +1,6 @@
+//class representing state of the game
+//includes user's data :)
+
 export default class State{
     constructor(){
         //using singleton, to prevent multiple states running 
