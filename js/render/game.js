@@ -73,10 +73,10 @@ function createWeather(state) {
     section.innerHTML = `
         <p>Weather forecast</p>
         <div class="weather-container">
-            <span class="weather-icon">☀️</span>
+            <span class="weather-icon">${state.weather.icon}</span>
             <div class="weather-info">
-                <span class="weather-type">Sunny</span>
-                <span class="weather-perk">+20% crop growth</span>
+                <span class="weather-type">${state.weather.type}</span>
+                <span class="weather-perk">${state.weather.perk}</span>
             </div>
         </div>
     `;

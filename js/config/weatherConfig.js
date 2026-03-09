@@ -1,4 +1,4 @@
-export const WEATHER_CONFIG = {
+export default {
     SUNNY: {
         type: 'Sunny',
         icon: '☀️',
@@ -23,4 +23,4 @@ export const WEATHER_CONFIG = {
         perk: '-10% crop growth',
         multiplier: 0.9
     }
-};
+}

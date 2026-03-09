@@ -1,3 +1,4 @@
+import weatherConfig from "../config/weatherConfig.js";
 //class representing state of the game
 //includes user's data :)
 
@@ -8,6 +9,7 @@ export default class State{
         if (State._instance) {
             return State._instance;
             }
+        this.weather = weatherConfig.RAINY;    
         this.user = {
             name: 'Player',
             money: 1000,
