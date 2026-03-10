@@ -17,22 +17,21 @@ export default class State{
             lemonadeSold: 0,
             inventory:{
                 itemInventory: {
-                    'shovel': 0,    
                     'wateringCan': 0
                 },
                 seedInventory:{
-                    starterPack: 0, 
-                    greenPack: 0,
-                    gardenPack: 0,
-                    exoticPack: 0,
-                    rarePack: 0,
-                    legendaryPack: 0
+                    starter: 0, 
+                    green: 0,
+                    garden: 0,
+                    exotic: 0,
+                    rare: 0,
+                    legendary: 0
                 }
 
             }
 
         }
-        this.game= {
+        this.game = {
             weather: 'sunny',
             plot1: {
                 full: false,

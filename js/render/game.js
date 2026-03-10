@@ -1,4 +1,5 @@
 import State from '../classes/State.js';
+import { PACKS_CONFIG } from '../config/packsConfig.js';
 
 export function renderGame(container) {
     const state = State.instance;
@@ -34,9 +35,9 @@ function createDashboard(state, container) {
         </nav>
         <section class="trader">
             <p>trader</p>
-            <img src="img/trader.png" alt="trader-img">
+            <p>watering can - $1500</p>
             <div class="trader-container">
-                ${'<button class="trader-item"></button>'.repeat(3)}
+                <img src="img/watering_can.png" alt="trader item" class="trader-item" draggable="false">
             </div>
         </section>
         <section class="lemonstand" style="cursor: pointer">
@@ -49,6 +50,11 @@ function createDashboard(state, container) {
         state.user.money += 1;
         state.user.moneyMade += 1;
         state.user.lemonadeSold += 1;
+        renderGame(container);
+    });
+
+    aside.querySelector('.trader-item').addEventListener('click', () => {
+        state.user.inventory.itemInventory.wateringCan += 1;
         renderGame(container);
     });
 
@@ -86,12 +92,28 @@ function createWeather(state) {
 function createSeeds(state) {
     const section = document.createElement('section');
     section.classList.add('seeds');
+    const seedsHtml = Object.keys(PACKS_CONFIG).map(packKey => {
+        const pack = PACKS_CONFIG[packKey];
+        const count = state.user.inventory.seedInventory[pack.id] || 0;
+
+        return `
+            <div class="seed">
+            <p id="seed-name">${pack.name}</p>
+                <div class="seed-pack-image">
+                    <img src="${pack.icon}" alt="${pack.name}" class="seed-icon">
+                </div>
+                <div class="seed-count">${count}</div>
+            </div>
+        `;
+    }).join('');
+
     section.innerHTML = `
-        <p>Seeds</p>
+        <p class="seeds-title">SEEDS</p>
         <div class="seed-container">
-            ${'<div class="seed"></div>'.repeat(6)}
+            ${seedsHtml}
         </div>
     `;
+
     return section;
 }
 
@@ -102,7 +124,7 @@ function createRightBottom(state, container) {
         <section class="tools">
             <p>Tools</p>
             <div class="tools-container">
-                ${'<button class="tool"></button>'.repeat(3)}
+                ${'<img src="img/watering_can.png" alt="tool" class="tool">'}
             </div>
         </section>
         <section class="input-section">
