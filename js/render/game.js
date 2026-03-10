@@ -92,16 +92,15 @@ function createWeather(state) {
 function createSeeds(state) {
     const section = document.createElement('section');
     section.classList.add('seeds');
-    
-    // Projdeme všechny definované balíčky v konfiguraci
     const seedsHtml = Object.keys(PACKS_CONFIG).map(packKey => {
         const pack = PACKS_CONFIG[packKey];
         const count = state.user.inventory.seedInventory[pack.id] || 0;
 
         return `
             <div class="seed">
+            <p id="seed-name">${pack.name}</p>
                 <div class="seed-pack-image">
-                    <span class="seed-icon">${pack.icon}</span>
+                    <img src="${pack.icon}" alt="${pack.name}" class="seed-icon">
                 </div>
                 <div class="seed-count">${count}</div>
             </div>

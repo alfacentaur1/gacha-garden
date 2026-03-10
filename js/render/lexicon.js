@@ -29,7 +29,9 @@ function createLexiconCard(plant) {
     const rarityClass = `rarity-${plant.rarity.toLowerCase()}`;
 
 article.innerHTML = `
-        <span class="lexicon-icon">${getPlantEmoji(plant.name)}</span>
+        <div class="lexicon-image-wrapper">
+            ${getPlantImageHTML(plant.name)}
+        </div>
         <h3 class="lexicon-name">${plant.name}</h3>
         <span class="lexicon-rarity ${rarityClass}">${plant.rarity.toUpperCase()}</span>
         
@@ -45,12 +47,17 @@ article.innerHTML = `
         </div>
     `;
     return article;
-    return article;
 }
-function getPlantEmoji(name) {
-    const emojis = { 
-        'Tomato': '🍅', 'Wheat': '🌾', 'Pepper': '🌶️', 
-        'Orange': '🍊', 'Banana': '🍌', 'Mushroom': '🍄' 
+
+function getPlantImageHTML(name) {
+    const plantImages = { 
+        'Tomato': 'tomato.png', 'Wheat': 'wheat.png', 'Pepper': 'pepper.png', 
+        'Orange': 'orange.png', 'Banana': 'banana.png', 'Mushroom': 'mushroom.png' 
     };
-    return emojis[name] || '🌱';
+    
+    const filename = plantImages[name] ;
+    
+    const imagePath = `../img/${filename}`;
+    
+    return `<img src="${imagePath}" alt="${name}" class="lexicon-image" />`;
 }

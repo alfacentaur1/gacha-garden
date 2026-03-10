@@ -4,7 +4,7 @@ export const PACKS_CONFIG = {
   STARTER: {
     id: 'starter',
     name: 'Starter Pack',
-    icon: '🌱',
+    icon: '../img/sprout.png',
     price: 10,
     loot: [
       { plant: P.TOMATO, chance: 60 },
@@ -16,7 +16,7 @@ export const PACKS_CONFIG = {
   GREEN: {
     id: 'green',
     name: 'Green Pack',
-    icon: '🌿',
+    icon: '../img/leaf.png',
     price: 25,
     loot: [
       { plant: P.TOMATO, chance: 35 },
@@ -29,7 +29,7 @@ export const PACKS_CONFIG = {
   GARDEN: {
     id: 'garden',
     name: 'Garden Pack',
-    icon: '🌻',
+    icon: '../img/sunflower.png',
     price: 50,
     loot: [
       { plant: P.TOMATO,   chance: 20 },
@@ -43,7 +43,7 @@ export const PACKS_CONFIG = {
   EXOTIC: {
     id: 'exotic',
     name: 'Exotic Pack',
-    icon: '🌴',
+    icon: '../img/palm.png',
     price: 100,
     loot: [
       { plant: P.PEPPER,   chance: 20 },
@@ -55,7 +55,7 @@ export const PACKS_CONFIG = {
   RARE: {
     id: 'rare',
     name: 'Rare Pack',
-    icon: '✨',
+    icon: '../img/star.png',
     price: 200,
     loot: [
       { plant: P.ORANGE,   chance: 20 },
@@ -66,7 +66,7 @@ export const PACKS_CONFIG = {
   LEGENDARY: {
     id: 'legendary',
     name: 'Legendary Pack',
-    icon: '👑',
+    icon: '../img/crown.png',
     price: 500,
     loot: [
       { plant: P.BANANA,   chance: 30 },

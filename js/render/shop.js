@@ -51,13 +51,14 @@ function createPackCard(pack) {
 
     const chancesHTML = pack.loot.map(item => `
         <li class="chance-row ${item.plant.rarity.toLowerCase()}">
-            <span>${getPlantEmoji(item.plant.name)} ${item.plant.name}</span>
+            <img src="${item.plant.image}" alt="${item.plant.name}" class="chance-icon">
+            <p class="chance-name">${item.plant.name}</p>
             <span class="rarity">${item.chance}%</span>
         </li>
     `).join('');
 
     article.innerHTML = `
-        <span class="pack-icon">${pack.icon}</span>
+        <img src="${pack.icon}" alt="${pack.name}" class="pack-icon">
         <h3 class="pack-name">${pack.name}</h3>
         <ul class="pack-chances">
             ${chancesHTML}
@@ -65,15 +66,6 @@ function createPackCard(pack) {
         <button class="buy-btn" data-id="${pack.id}">Buy — $${pack.price}</button>
     `;
     return article;
-}
-
-
-function getPlantEmoji(name) {
-    const emojis = { 
-        'Tomato': '🍅', 'Wheat': '🌾', 'Pepper': '🌶️', 
-        'Orange': '🍊', 'Banana': '🍌', 'Mushroom': '🍄' 
-    };
-    return emojis[name] || '🌱';
 }
 
 function showNotify(text, isError = false) {
