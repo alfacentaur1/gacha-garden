@@ -1,9 +1,16 @@
 @import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap');
 
-*{ 
+* { 
     box-sizing: border-box; 
     margin: 0; 
     padding: 0; 
+}
+
+body {
+    background: #d6cfc4;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
 }
 
 p {
@@ -25,314 +32,376 @@ h1 {
     text-transform: uppercase;
 }
 
-body {
-  background: #d6cfc4;
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  /*overflow: hidden;*/
-}
-
 header {
-  text-align: center;
-  padding: 14px;
-  flex-shrink: 0;
-  border-bottom: 2px solid #a09880;
+    text-align: center;
+    padding: 14px;
+    flex-shrink: 0;
+    border-bottom: 2px solid #a09880;
 }
 
 .layout {
-  flex: 1;
-  display: grid;
-  grid-template-columns: 1fr 1.8fr 1.8fr;
-  grid-template-rows: 1fr 1fr 1fr auto;
-  gap: 10px;
-  padding: 14px;
-  min-height: 0;
-  align-content: start;
+    flex: 1;
+    display: grid;
+    grid-template-columns: 1fr 1.8fr 1.8fr;
+    grid-template-rows: auto 1fr auto;
+    gap: 10px;
+    padding: 14px;
+    min-height: 0;
+    align-content: start;
 }
 
 .dashboard {
-  grid-column: 1;
-  grid-row: 1 / 4;
-  background: #ede8e0;
-  border: 2px solid #a09880;
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  padding: 8px;
-  overflow: hidden;
+    grid-column: 1;
+    grid-row: 1 / 4;
+    background: #ede8e0;
+    border: 2px solid #a09880;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    padding: 8px;
+    overflow: hidden;
 }
 
 .statistics {
-  background: #d6cfc4;
-  border: 1px solid #a09880;
-  padding: 8px;
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
+    background: #d6cfc4;
+    border: 1px solid #a09880;
+    padding: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
 }
 
 .stat-item {
-  font-family: 'Lato', sans-serif;
-  font-size: 0.7rem;
-  font-weight: 700;
-  color: #4a4a4a;
-  background: #ede8e0;
-  border: 1px solid #a09880;
-  padding: 4px 8px;
+    font-family: 'Lato', sans-serif;
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: #4a4a4a;
+    background: #ede8e0;
+    border: 1px solid #a09880;
+    padding: 4px 8px;
 }
 
 .nav {
-  background: #d6cfc4;
-  border: 1px solid #a09880;
-  height: 32px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  
+    background: #d6cfc4;
+    border: 1px solid #a09880;
+    height: 32px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
 }
 
 .nav:hover {
-  background: #c4bdb2;
-  cursor: pointer;
+    background: #c4bdb2;
 }
 
 .trader {
-  background: #d6cfc4;
-  border: 1px solid #a09880;
-  padding: 6px;
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
+    background: #d6cfc4;
+    border: 1px solid #a09880;
+    padding: 6px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
 }
 
 .trader img {
-  width: 100%;
-  height: 100px;
-  object-fit: contain;
+    display: block;
+    max-width: 60px;
+    max-height: 60px;
+    width: auto;
+    height: auto;
+    margin: 10px auto;
+    object-fit: contain;
+    image-rendering: pixelated;
 }
 
 .trader-container {
-  display: flex;
-  gap: 4px;
-  flex: 1;
+    display: flex;
+    gap: 4px;
+    flex: 1;
 }
 
 .trader-item {
-  flex: 1;
-  background: #ede8e0;
-  border: 1px solid #a09880;
+    flex: 1;
+    background: #ede8e0;
+    border: 1px solid #a09880;
+    cursor: pointer;
 }
 
 .trader-item:hover {
-  background: #c4bdb2;
-  cursor: pointer;
+    background: #c4bdb2;
 }
 
 .lemonstand {
-  background: #d6cfc4;
-  border: 1px solid #a09880;
-  padding: 6px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 4px;
-  cursor: pointer;
+    background: #d6cfc4;
+    border: 1px solid #a09880;
+    padding: 6px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    cursor: pointer;
 }
 
 .lemonstand:hover {
-  background: #c4bdb2;
+    background: #c4bdb2;
 }
 
 .lemonstand img {
-  width: 80%;
-  height: 150px;
-  object-fit: contain;
-  height: auto;
-  image-rendering: pixelated;
+    max-width: 80px;
+    height: auto;
+    object-fit: contain;
+    image-rendering: pixelated;
 }
 
 .fields-container {
-  grid-column: 2;
-  grid-row: 1 / 4;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
+    grid-column: 2;
+    grid-row: 1 / 4;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 }
 
 .field {
-  flex: 1;
-  background: #4a7c3f;
-  border: 2px solid #a09880;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: repeat(3, 1fr);
-  gap: 4px;
-  padding: 4px;
+    flex: 1;
+    background: #4a7c3f;
+    border: 2px solid #a09880;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    gap: 4px;
+    padding: 4px;
 }
 
 .plot {
-  background: #3a6b30;
-  border: 1px solid #2d5425;
+    background: #3a6b30;
+    border: 1px solid #2d5425;
 }
 
 .weather-forecast {
-  grid-column: 3;
-  grid-row: 1;
-  background: #ede8e0;
-  border: 2px solid #a09880;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 6px;
-  padding: 8px;
+    grid-column: 3;
+    grid-row: 1;
+    background: #ede8e0;
+    border: 2px solid #a09880;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    padding: 6px;
 }
 
 .weather-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 4px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
 }
 
 .weather-icon {
-  font-size: 1.8rem;
+    font-size: 1.4rem;
 }
 
 .weather-type {
-  font-size: 0.8rem;
-  font-weight: 700;
-  color: #4a4a4a;
-  text-transform: uppercase;
-  letter-spacing: 1px;
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: #4a4a4a;
+    text-transform: uppercase;
 }
 
 .weather-perk {
-  font-size: 0.65rem;
-  color: #6a6a6a;
+    font-size: 0.6rem;
+    color: #6a6a6a;
 }
-
-.weather-info {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 4px;
-}
-
 
 .seeds {
-  grid-column: 3;
-  grid-row: 2;
-  background: #ede8e0;
-  border: 2px solid #a09880;
-  padding: 8px;
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
+    grid-column: 3;
+    grid-row: 2;
+    background: #ede8e0;
+    border: 2px solid #a09880;
+    padding: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    overflow-y: auto;
 }
 
 .seed-container {
-  flex: 1;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 4px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(70px, 1fr));
+    gap: 8px;
+    padding: 5px;
+    justify-items: center;
 }
 
 .seed {
-  background: #d6cfc4;
-  border: 1px solid #a09880;
+    width: 100%;
+    min-width: 70px;
+    max-width: 90px;
+    height: 100px;
+    background: #d6cfc4;
+    border: 1px solid #a09880;
+    border-radius: 4px;
+    box-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    padding: 6px;
+}
+
+.seed-pack-image {
+    font-size: 2rem;
+}
+
+.seed-count {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #4a4a4a;
 }
 
 .right-bottom {
-  grid-column: 3;
-  grid-row: 3;
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
+    grid-column: 3;
+    grid-row: 3;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
 }
 
 .tools {
-  background: #ede8e0;
-  border: 2px solid #a09880;
-  padding: 8px;
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  flex: 1;
-}
-
-.input-section {
-  background: #ede8e0;
-  border: 2px solid #a09880;
-  padding: 8px;
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-  align-items: center;
-}
-
-input {
-  width: 50%;
-  padding: 4px 8px;
-  border: 1px solid #a09880;
-  background: #d6cfc4;
-  font-family: 'Lato', sans-serif;
-  font-size: 0.75rem;
-
-}
-
-.save-name {
-  padding: 4px 12px;
-  border: 1px solid #a09880;
-  background: #d6cfc4;
-  font-family: 'Lato', sans-serif;
-  font-size: 0.75rem;
-  cursor: pointer;
-}
-
-.save-name:hover {
-  background: #c4bdb2;
+    background: #ede8e0;
+    border: 2px solid #a09880;
+    padding: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
 }
 
 .tools-container {
-  flex: 1;
-  display: flex;
-  gap: 6px;
-  justify-content: space-evenly;
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+    flex-wrap: wrap;
+    padding: 5px;
 }
 
-.tool {
-  flex: 1;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  max-width: 20%;
+.tool, .trader-item {
+    width: 50px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #d6cfc4;
+    border: 1px solid #a09880;
+    border-radius: 4px;
+    cursor: pointer;
 }
+
+.trader-item{
+      background: #b8b1a8;
+}
+
+.tool img, .trader-item img {
+    max-width: 90%;
+    max-height: 90%;
+    object-fit: contain;
+    image-rendering: pixelated;
+}
+
 .tool:hover {
-  background: #c4bdb2;
-  cursor: pointer;
+    background: #c4bdb2;
 }
 
+.input-section {
+    background: #ede8e0;
+    border: 2px solid #a09880;
+    padding: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    align-items: center;
+}
+
+input {
+    width: 90%;
+    padding: 4px 8px;
+    border: 1px solid #a09880;
+    background: #d6cfc4;
+    font-family: 'Lato', sans-serif;
+    font-size: 0.75rem;
+}
+
+.save-name {
+    padding: 4px 12px;
+    border: 1px solid #a09880;
+    background: #d6cfc4;
+    font-family: 'Lato', sans-serif;
+    font-size: 0.75rem;
+    cursor: pointer;
+    margin-top: 4px;
+}
+
+.save-name:hover {
+    background: #c4bdb2;
+}
+
+#media-input {
+    width: 60%;
+}
+
+@media (max-width: 1100px) {
+    .layout {
+        grid-template-columns: 1fr 1.5fr;
+        grid-template-rows: auto;
+    }
+
+    .dashboard {
+        grid-column: 1;
+        grid-row: 1;
+    }
+
+    .fields-container {
+        grid-column: 2;
+        grid-row: 1 / 3;
+    }
+
+    .weather-forecast {
+        grid-column: 1;
+        grid-row: 2;
+    }
+
+    .seeds {
+        grid-column: 1;
+        grid-row: 3;
+    }
+
+    .right-bottom {
+        grid-column: 2;
+        grid-row: 3;
+    }
+}
 
 @media (max-width: 768px) {
-  body { overflow-y: auto; height: auto; min-height: 100vh; }
-  
-  .layout { 
-    grid-template-columns: 1fr; 
-    grid-template-rows: auto; 
-    gap: 10px; 
-    padding: 10px; 
-  }
+    .layout {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        padding: 10px;
+    }
 
-  .dashboard        { grid-column: 1; grid-row: auto; height: auto; }
-  .fields-container { grid-column: 1; grid-row: auto; height: 400px; }
-  .weather-forecast { grid-column: 1; grid-row: auto; height: 120px; }
-  .seeds            { grid-column: 1; grid-row: auto; height: 150px; }
-  .right-bottom     { grid-column: 1; grid-row: auto; height: auto; }
+    .dashboard, .fields-container, .weather-forecast, .seeds, .right-bottom {
+        grid-column: auto !important;
+        grid-row: auto !important;
+        width: 100%;
+    }
+
+    .field {
+        min-height: 250px;
+    }
+
+    .seed-container {
+        grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+    }
 }
 
-
-.is-hidden {
-    display: none !important;
-}
+.is-hidden { display: none !important; }

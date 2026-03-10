@@ -35,7 +35,7 @@ export function renderShop(container) {
 
         if (state.user.money >= pack.price) {
             state.user.money -= pack.price;
-
+            //add to inventory
             state.user.inventory.seedInventory[pack.id] += 1;  
             showNotify(`You bought ${pack.name}!`, false);
         } else {
@@ -67,16 +67,6 @@ function createPackCard(pack) {
     return article;
 }
 
-function rollForPlant(lootConfig) {
-    const roll = Math.random() * 100;
-    let cumulativeChance = 0;
-
-    for (const item of lootConfig) {
-        cumulativeChance += item.chance;
-        if (roll <= cumulativeChance) return item.plant;
-    }
-    return lootConfig[0].plant;
-}
 
 function getPlantEmoji(name) {
     const emojis = { 

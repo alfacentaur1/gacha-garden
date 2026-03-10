@@ -1,4 +1,5 @@
 import State from '../classes/State.js';
+import { PACKS_CONFIG } from '../config/packsConfig.js';
 
 export function renderGame(container) {
     const state = State.instance;
@@ -91,12 +92,29 @@ function createWeather(state) {
 function createSeeds(state) {
     const section = document.createElement('section');
     section.classList.add('seeds');
+    
+    // Projdeme všechny definované balíčky v konfiguraci
+    const seedsHtml = Object.keys(PACKS_CONFIG).map(packKey => {
+        const pack = PACKS_CONFIG[packKey];
+        const count = state.user.inventory.seedInventory[pack.id] || 0;
+
+        return `
+            <div class="seed">
+                <div class="seed-pack-image">
+                    <span class="seed-icon">${pack.icon}</span>
+                </div>
+                <div class="seed-count">${count}</div>
+            </div>
+        `;
+    }).join('');
+
     section.innerHTML = `
-        <p>Seeds</p>
+        <p class="seeds-title">SEEDS</p>
         <div class="seed-container">
-            ${'<div class="seed"></div>'.repeat(6)}
+            ${seedsHtml}
         </div>
     `;
+
     return section;
 }
 
