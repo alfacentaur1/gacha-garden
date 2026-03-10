@@ -12,7 +12,7 @@ export default class State{
         this.weather = weatherConfig.RAINY;    
         this.user = {
             name: 'Player',
-            money: 1000,
+            money: 10000,
             moneyMade: 0,
             lemonadeSold: 0,
             inventory:{

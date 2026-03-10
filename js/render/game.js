@@ -58,7 +58,9 @@ function createDashboard(state, container) {
     traderItem.addEventListener('click', () => {
         if(state.user.money >= 1500) {
             state.user.money -= 1500;
-            alert(state.user.money);
+            //media
+            const coinSound = new Audio('../media/coins.mp3');
+            coinSound.play();
             state.user.inventory.itemInventory.wateringCan += 1;
             renderGame(container);
         } else {
