@@ -72,6 +72,13 @@ header {
     padding: 8px;
 }
 
+.input-section {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    align-items: center;
+}
+
 .statistics, .trader, .lemonstand {
     background: #d6cfc4;
     border: 1px solid #a09880;
@@ -89,6 +96,10 @@ header {
     background: #ede8e0;
     border: 1px solid #a09880;
     padding: 4px 8px;
+}
+
+.stat-item + .stat-item {
+    margin-top: 4px;
 }
 
 .nav {
@@ -192,17 +203,32 @@ header {
     min-height: 0;
 }
 
+.weather-info{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+}
+
+.weather-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+}
+
 .weather-icon {
     font-size: 1.4rem;
 }
 
-.weather-type {
+.weather-type, .weather-perk {
     font-size: 0.7rem;
     font-weight: 700;
     color: #4a4a4a;
     text-transform: uppercase;
 }
 
+/* nested css */
 .seeds {
     grid-column: 3;
     grid-row: 2;
@@ -210,31 +236,39 @@ header {
     flex-direction: column;
     gap: 6px;
     overflow-y: auto;
-    min-height: 0;
-}
 
-.seed-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
-    gap: 8px;
-    padding: 5px;
-    justify-items: center;
-}
+    .seed-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+        gap: 8px;
+        padding: 5px;
+        justify-items: center;
 
-.seed {
-    width: 90px;
-    height: 120px;
-    background: #d6cfc4;
-    border: 1px solid #a09880;
-    border-radius: 4px;
-    box-shadow: 1px 1px 2px rgba(0,0,0,0.1);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-evenly;
-    padding: 6px;
-    overflow: hidden;
-    flex-shrink: 0;
+        .seed {
+            width: 90px;
+            height: 120px;
+            background: #d6cfc4;
+            border: 1px solid #a09880;
+            border-radius: 4px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-evenly;
+            
+            .seed-pack-image {
+                font-size: 2.5rem;
+                img {
+                    max-width: 100%;
+                    image-rendering: pixelated;
+                }
+            }
+
+            .seed-count {
+                font-size: 1.2rem;
+                font-weight: bold;
+            }
+        }
+    }
 }
 
 .seed-pack-image {
@@ -254,8 +288,9 @@ header {
 }
 
 .seed-count {
-    font-size: 1.2rem;
+    font-size: 1rem;
     font-weight: bold;
+    font-family: 'Lato', sans-serif;
     color: #4a4a4a;
 }
 
@@ -272,8 +307,19 @@ header {
     display: flex;
     gap: 8px;
     justify-content: center;
+    align-items: center;
     flex-wrap: wrap;
     padding: 5px;
+}
+
+.tool-badge {
+    background: #a09880;
+    color: #ede8e0;
+    font-family: 'Lato', sans-serif;
+    font-size: 0.65rem;
+    font-weight: 700;
+    padding: 2px 6px;
+    border-radius: 4px;
 }
 
 input {

@@ -1,5 +1,6 @@
 import State from '../classes/State.js';
 import { PACKS_CONFIG } from '../config/packsConfig.js';
+import Toastify from 'https://cdn.skypack.dev/toastify-js';
 
 export function renderGame(container) {
     const state = State.instance;
@@ -53,10 +54,41 @@ function createDashboard(state, container) {
         renderGame(container);
     });
 
-    aside.querySelector('.trader-item').addEventListener('click', () => {
-        state.user.inventory.itemInventory.wateringCan += 1;
-        renderGame(container);
+    let traderItem = aside.querySelector('.trader-item');
+    traderItem.addEventListener('click', () => {
+        if(state.user.money >= 1500) {
+            state.user.money -= 1500;
+            //media
+            const coinSound = new Audio('../media/coins.mp3');
+            coinSound.play();
+            state.user.inventory.itemInventory.wateringCan += 1;
+            renderGame(container);
+        } else {
+            Toastify({
+                text: "Not enough money for watering can!",
+                duration: 3000,
+                gravity: "top",
+                position: "center",
+                stopOnFocus: true,
+                style: {
+                    position: "fixed",
+                    zIndex: "9999",
+                    top: "20px",
+                    background: "#a09880",
+                    border: "2px solid #7c3f3f",
+                    boxShadow: "0 4px 0 #7c3f3f",
+                    fontFamily: "'Lato', sans-serif",
+                    fontSize: "0.8rem",
+                    borderRadius: "0px",
+                    color: "#ede8e0",
+                    textAlign: "center",
+                    minWidth: "200px"
+                }
+            }).showToast();
+        }
     });
+
+
 
     return aside;
 }
@@ -120,11 +152,13 @@ function createSeeds(state) {
 function createRightBottom(state, container) {
     const div = document.createElement('div');
     div.classList.add('right-bottom');
+    let wateringCount = state.user.inventory.itemInventory.wateringCan;
     div.innerHTML = `
         <section class="tools">
             <p>Tools</p>
             <div class="tools-container">
                 ${'<img src="img/watering_can.png" alt="tool" class="tool">'}
+                <span class="tool-badge">free to use: ${wateringCount}</span>
             </div>
         </section>
         <section class="input-section">

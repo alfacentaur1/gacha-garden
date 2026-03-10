@@ -34,6 +34,9 @@ export function renderShop(container) {
         if (!pack) return;
 
         if (state.user.money >= pack.price) {
+            //media use
+            const coinSound = new Audio('../media/coins.mp3');
+            coinSound.play();
             state.user.money -= pack.price;
             //add to inventory
             state.user.inventory.seedInventory[pack.id] += 1;  
