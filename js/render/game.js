@@ -45,6 +45,9 @@ function createDashboard(state, container) {
             <p id="sell-lemonade">click to sell lemonade</p>
             <img src="/img/lemonstand.png" alt="Lemon stand">
         </section>
+        <video loop autoplay muted class="knight-video">
+            <source src="./media/knight.mp4" type="video/mp4">
+        </video>
     `;
 
     aside.querySelector('.lemonstand').addEventListener('click', () => {
