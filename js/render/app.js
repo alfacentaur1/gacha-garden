@@ -3,6 +3,7 @@ import { renderGame } from './game.js';
 import { renderLexicon } from './lexicon.js';
 import { renderShop } from './shop.js';
 import loop from './loop.js';
+import Toastify from 'https://cdn.skypack.dev/toastify-js';
 
 const appContainer = document.getElementById('app');
 
@@ -57,7 +58,51 @@ if (initialPage === 'shop') renderShop(appContainer);
 else if (initialPage === 'lexicon') renderLexicon(appContainer);
 else renderGame(appContainer);
 
+window.addEventListener("offline", () => {
+    Toastify({
+        text: "You are offline. Some features may not work.",   
+        duration: 3000,
+        gravity: "top",
+        position: "center",
+        style: {
+            position: "fixed",
+            zIndex: "9999",
+            top: "20px",
+            background: "#a04848",
+            color: "#fff",
+            fontFamily: "'Lato', sans-serif",
+            fontSize: "0.8rem",
+            border: "2px solid #7c3f3f",
+            boxShadow: "0 4px 0 #6b3030",
+            textAlign: "center",
+            minWidth: "200px"
+        }
+    }).showToast();
+});
+
+window.addEventListener("online", () => {   
+    Toastify({
+        text: "You are back online!",
+        duration: 3000,
+        gravity: "top", 
+        position: "center",
+        style: {
+            position: "fixed",
+            zIndex: "9999", 
+            top: "20px",
+            background: "#4a7c3f",
+            color: "#fff",
+            fontFamily: "'Lato', sans-serif",
+            fontSize: "0.8rem",
+            border: "2px solid #3a6b30",
+            boxShadow: "0 4px 0 #2a4b20",
+            textAlign: "center",
+            minWidth: "200px"
+        }
+    }).showToast();
+});
 loop();
+
 
 
 

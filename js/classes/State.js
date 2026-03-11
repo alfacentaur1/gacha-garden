@@ -2,7 +2,7 @@ import weatherConfig from "../config/weatherConfig.js";
 //class representing state of the game
 //includes user's data :)
 
-export default class State{
+export default class State {
     static _instance = null;
     constructor(){
         //using singleton, to prevent multiple states running 
