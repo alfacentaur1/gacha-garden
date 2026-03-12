@@ -110,6 +110,7 @@ header {
     justify-content: center;
     align-items: center;
     cursor: pointer;
+    min-height:40px;
 }
 
 .nav:hover {

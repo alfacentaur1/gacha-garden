@@ -31,7 +31,10 @@ function weatherChangeLoop() {
     const state = State.instance;
     if (Math.random() < 0.01) { // 1% chance of weather change
         const weatherTypes = Object.values(weatherConfig);
-        state.weather = weatherTypes[Math.floor(Math.random() * weatherTypes.length)];
+        let weather = weatherTypes[Math.floor(Math.random() * weatherTypes.length)]
+        if(weather.type !== state.weather.type){
+            state.weather = weather;
+        }
 Toastify({
     text: `Weather: ${state.weather.type.toUpperCase()}\n${state.weather.perk}`,
     duration: 3000,
@@ -53,11 +56,16 @@ Toastify({
         minWidth: "200px"
     }
 }).showToast();
-    //re-render game to update weather display 
+    //re-render only weather section, to prevent full re-render
     //but only on game page
     if (history.state?.page === 'game' || !history.state) {
-            renderGame(appContainer);
+        const weatherSection = document.querySelector('.weather-forecast');
+        if (weatherSection) {
+            weatherSection.querySelector('.weather-icon').textContent = state.weather.icon;
+            weatherSection.querySelector('.weather-type').textContent = state.weather.type;
+            weatherSection.querySelector('.weather-perk').textContent = state.weather.perk;
         }
     }
     }
+}
 }
