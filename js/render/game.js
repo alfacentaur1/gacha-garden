@@ -54,7 +54,13 @@ function createDashboard(state, container) {
         state.user.money += 1;
         state.user.moneyMade += 1;
         state.user.lemonadeSold += 1;
-        renderGame(container);
+        const stats = aside.querySelector('.statistics');
+    stats.innerHTML = `
+        <p>Statistics</p>
+        <div class="stat-item">Money: $${state.user.money}</div>
+        <div class="stat-item">Lemonade sold: ${state.user.lemonadeSold}</div>
+        <div class="stat-item">Money made: $${state.user.moneyMade}</div>
+    `;
     });
 
     let traderItem = aside.querySelector('.trader-item');
@@ -65,7 +71,8 @@ function createDashboard(state, container) {
             const coinSound = new Audio('../media/coins.mp3');
             coinSound.play();
             state.user.inventory.itemInventory.wateringCan += 1;
-            renderGame(container);
+            //render only watering can count, to prevent full re-render
+            renderCanCount();
         } else {
             Toastify({
                 text: "Not enough money for watering can!",
@@ -193,4 +200,9 @@ function sanitize(str) {
     };
     const reg = /[&<>"'/]/ig;
     return str.replace(reg, (match) => map[match]);
+}
+
+function renderCanCount(){
+    let can = document.querySelector('.tool');
+    can.nextElementSibling.textContent = `free to use: ${State.instance.user.inventory.itemInventory.wateringCan}`;
 }
