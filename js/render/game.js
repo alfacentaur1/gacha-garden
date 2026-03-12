@@ -71,6 +71,7 @@ function createDashboard(state, container) {
             const coinSound = new Audio('../media/coins.mp3');
             coinSound.play();
             state.user.inventory.itemInventory.wateringCan += 1;
+            console.log('Bought watering can, total:', state.user.inventory.itemInventory.wateringCan);
             //render only watering can count, to prevent full re-render
             renderCanCount();
         } else {
@@ -141,7 +142,7 @@ function createSeeds(state) {
         return `
             <div class="seed">
             <p id="seed-name">${pack.name}</p>
-                <div class="seed-pack-image">
+                <div class="seed-pack-image" draggable="true">
                     <img src="${pack.icon}" alt="${pack.name}" class="seed-icon">
                 </div>
                 <div class="seed-count">${count}</div>
@@ -167,7 +168,7 @@ function createRightBottom(state, container) {
         <section class="tools">
             <p>Tools</p>
             <div class="tools-container">
-                ${'<img src="img/watering_can.png" alt="tool" class="tool">'}
+                ${'<img src="img/watering_can.png" alt="tool" class="tool" draggable="true">' }
                 <span class="tool-badge">free to use: ${wateringCount}</span>
             </div>
         </section>
@@ -203,6 +204,6 @@ function sanitize(str) {
 }
 
 function renderCanCount(){
-    let can = document.querySelector('.tool');
-    can.nextElementSibling.textContent = `free to use: ${State.instance.user.inventory.itemInventory.wateringCan}`;
+    let can = document.querySelector('.tool-badge');
+    can.textContent = `free to use: ${State.instance.user.inventory.itemInventory.wateringCan}`;
 }
