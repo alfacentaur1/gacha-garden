@@ -6,6 +6,7 @@ import loop from './loop.js';
 import Toastify from 'https://cdn.skypack.dev/toastify-js';
 import '../classes/HeaderElement.js';
 
+
 const appContainer = document.getElementById('app');
 
 function navigate(page, renderFunc) {
