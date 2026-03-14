@@ -5,32 +5,39 @@ import FieldsState from '../classes/FieldsState.js';
 import Pack from '../classes/Pack.js';
 import {reloadCanvas} from './loop.js';
 import triggerRainEffect from './rain.js';
+import getBestPlantsForLocation from './geolocation.js';
 
-export function renderGame(container) {
+export async function renderGame(container) {
     const state = State.instance;
     container.innerHTML = '';
 
     const mainPage = document.createElement('main');
     mainPage.classList.add('layout');
     mainPage.id = 'page-game';
+    const dashboard = await createDashboard(state, container);
 
-    mainPage.appendChild(createDashboard(state, container));
+    mainPage.appendChild(dashboard);
     mainPage.appendChild(createFields(state));
     mainPage.appendChild(createWeather(state));
     mainPage.appendChild(createSeeds(state));
     mainPage.appendChild(createRightBottom(state, container));
 
     container.appendChild(mainPage);
+    
     addDragListeners(mainPage);
     addDragoverListeners(mainPage);
     addDropListeners(mainPage);
     addCollectListeners();
 }
 
-function createDashboard(state) {
+async function createDashboard(state) { 
     const aside = document.createElement('aside');
     aside.classList.add('dashboard');
     let sanitizedName = sanitize(state.user.name);
+    const bestPlants = await getBestPlantsForLocation().catch(() => [
+        { name: "Wheat" }, 
+        { name: "Tomato" }
+    ]);
     aside.innerHTML = `
         <p> ${sanitizedName}'s electronic diary</p>
         <section class="statistics">
@@ -42,6 +49,12 @@ function createDashboard(state) {
         <nav class="nav" id="nav">
             <p>seed shop and lexicon</p>
         </nav>
+        <section class="location">
+            <p>Best plants for your area:</p>
+            <ul class="best-plants">
+                ${bestPlants.map(plant => `<li>${plant.name}</li>`).join('')}
+            </ul>
+        </section>
         <section class="trader">
             <p>trader</p>
             <p>watering can - $1500</p>
@@ -57,31 +70,26 @@ function createDashboard(state) {
             <source src="./media/knight.mp4" type="video/mp4">
         </video>
     `;
-
     aside.querySelector('.lemonstand').addEventListener('click', () => {
         state.user.money += 1;
         state.user.moneyMade += 1;
         state.user.lemonadeSold += 1;
         const stats = aside.querySelector('.statistics');
-    stats.innerHTML = `
-        <p>Statistics</p>
-        <div class="stat-item">Money: $${state.user.money}</div>
-        <div class="stat-item">Lemonade sold: ${state.user.lemonadeSold}</div>
-        <div class="stat-item">Money made: $${state.user.moneyMade}</div>
-    `;
+        stats.innerHTML = `
+            <p>Statistics</p>
+            <div class="stat-item">Money: $${state.user.money}</div>
+            <div class="stat-item">Lemonade sold: ${state.user.lemonadeSold}</div>
+            <div class="stat-item">Money made: $${state.user.moneyMade}</div>
+        `;
     });
 
     let traderItem = aside.querySelector('.trader-item');
     traderItem.addEventListener('click', () => {
         if(state.user.money >= 1500) {
             state.user.money -= 1500;
-            console.log('Bought watering can, remaining money:', state.user.money);
-            //media
             const coinSound = new Audio('../media/coins.mp3');
             coinSound.play();
             state.user.inventory.itemInventory.wateringCan += 1;
-            console.log('Bought watering can, total:', state.user.inventory.itemInventory.wateringCan);
-            //render only watering can count, to prevent full re-render
             renderCanCount();
             renderMoney();
         } else {
@@ -108,8 +116,6 @@ function createDashboard(state) {
             }).showToast();
         }
     });
-
-
 
     return aside;
 }
@@ -440,4 +446,3 @@ function renderMoney() {
         moneyMadeEl.textContent = `Money made: $${State.instance.user.moneyMade}`;
     }
 }
-

@@ -42,6 +42,7 @@ export default class State {
                 plants:[]
             }
         }
+        this.latitude = null;
         State._instance = this;
     }
 
