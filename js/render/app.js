@@ -11,14 +11,38 @@ const appContainer = document.getElementById('app');
 function navigate(page, renderFunc) {
     const currentState = history.state;
     const currentPage = currentState ? currentState.page : 'game';
-    //anti spam for nav
-    if (currentPage === page) {
+    
+    if (currentPage === page) return;
+
+    history.pushState({ page: page }, '', `#${page}`);
+    //use view transition if supported
+    if (!document.startViewTransition) {
+        renderFunc(appContainer);
         return;
     }
-    //push new state to history and render page
-    history.pushState({ page: page }, '', `#${page}`);
-    renderFunc(appContainer);
+    //use view transition API for smooth transitions
+    document.startViewTransition(() => {
+        renderFunc(appContainer);
+    });
 }
+window.addEventListener('popstate', (event) => {
+    if (event.state && event.state.page) {
+        const pages = {
+            'game': renderGame,
+            'shop': renderShop,
+            'lexicon': renderLexicon
+        };
+        
+        const renderFunc = pages[event.state.page];
+        if (renderFunc) {
+            if (!document.startViewTransition) {
+                renderFunc(appContainer);
+            } else {
+                document.startViewTransition(() => renderFunc(appContainer));
+            }
+        }
+    }
+});
 
 appContainer.addEventListener('click', (e) => {
     const target = e.target;
