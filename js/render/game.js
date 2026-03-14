@@ -352,7 +352,6 @@ function addDropListeners(container) {
                         break; 
                     }
                 }
-                
                 renderSeedsCount();
                 renderPlotsWithPlants();
             }
