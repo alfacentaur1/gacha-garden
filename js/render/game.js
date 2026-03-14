@@ -23,6 +23,7 @@ export function renderGame(container) {
     addDragListeners(mainPage);
     addDragoverListeners(mainPage);
     addDropListeners(mainPage);
+    addCollectListeners();
 }
 
 function createDashboard(state) {
@@ -191,7 +192,10 @@ function createRightBottom(state, container) {
         <section class="input-section">
             <p>What's your name, gardener?</p>
             <input type="text" id="name-input" placeholder="Hmmm...">
-            <button class="save-name">Save</button>
+            <div id="name-buttons">
+                <button class="save-name">Save</button>
+                <button class="clear-name">Clear</button>
+            </div>
         </section>
     `;
 
@@ -203,6 +207,13 @@ function createRightBottom(state, container) {
             input.value = '';
         }
     });
+    div.querySelector('.clear-name').addEventListener('click', () => {
+        state.user.name = 'Player';
+        renderName(container);
+        div.querySelector('#name-input').value = '';
+    }
+    );
+
 
     return div;
 }
@@ -386,12 +397,38 @@ function renderSeedsCount() {
 
 function addCollectListeners() {
     const mainPage = document.getElementById('page-game');
+    mainPage.addEventListener('click', (e) => {
+        const plot = e.target.closest('.plot');
+        if (!plot) return;
+        const fieldId = parseInt(plot.closest('.field').dataset.fieldIndex);
+        const plotId = parseInt(plot.dataset.plotIndex);
+        const fieldState = FieldsState.instance;
+        const plant = (fieldId === 0) ? fieldState.field1[plotId] : fieldState.field2[plotId];
+        if (plant && plant.isReady) {
+            const state = State.instance;
+            state.user.money += plant.price;
+            state.user.moneyMade += plant.price;
+            if (fieldId === 0) {
+                fieldState.field1[plotId] = null;
+            } else {
+                fieldState.field2[plotId] = null;
+            }
+            console.log(`Collected: ${plant.name}, earned $${plant.price}`);
+            console.log(`Total money made: $${state.user.moneyMade}`);
+            renderMoney();
+            renderPlotsWithPlants();
+        }
+    });
 }
 
 function renderMoney() {
     const moneyEl = document.querySelector('.stat-item');
     if (moneyEl) {
         moneyEl.textContent = `Money: $${State.instance.user.money}`;
+    }
+    const moneyMadeEl = document.querySelectorAll('.stat-item')[2];
+    if (moneyMadeEl) {
+        moneyMadeEl.textContent = `Money made: $${State.instance.user.moneyMade}`;
     }
 }
 

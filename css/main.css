@@ -234,6 +234,7 @@ header {
     flex-direction: column;
     align-items: center;
     gap: 2px;
+    font-family: 'Lato', sans-serif;
 }
 
 .weather-container {
@@ -359,7 +360,7 @@ input {
     text-align: center;
 }
 
-.save-name {
+.save-name, .clear-name {
     padding: 4px 12px;
     border: 1px solid #a09880;
     background: #d6cfc4;
@@ -369,7 +370,7 @@ input {
     margin-top: 4px;
 }
 
-.save-name:hover {
+.save-name:hover, .clear-name:hover {
     background: #c4bdb2;
 }
 
@@ -538,7 +539,7 @@ input {
     transform: translateY(-10px);
 }
 
-.save-name:hover {
+.save-name:hover, .clear-name:hover {
     background: #c4bdb2;
     transform: translateY(-2px);
 }

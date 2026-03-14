@@ -4,7 +4,7 @@ export default class Plant {
         this.growTime = growthTime; 
         this.price = price;
         this.image = image; 
-        
+    
         this.plantedAt = Date.now();
         this.isReady = false;
     }
