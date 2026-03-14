@@ -559,6 +559,32 @@ input {
     transform: translateY(-2px);
 }
 
+/* ===== VIEW TRANSITION API ===== */
+ #page-shop, #page-lexicon {
+    view-transition-name: main-content;
+}
+
+/*old content*/
+::view-transition-old(main-content) {
+    animation: 300ms ease-out both fade-out, 300ms ease-out both slide-to-left;
+}
+
+/*new content*/
+::view-transition-new(main-content) {
+    animation: 300ms ease-in both fade-in, 300ms ease-in both slide-from-right;
+}
+
+@keyframes fade-out { to { opacity: 0; } }
+@keyframes fade-in { from { opacity: 0; } }
+
+@keyframes slide-to-left {
+    to { transform: translateX(-30px); }
+}
+
+@keyframes slide-from-right {
+    from { transform: translateX(30px); }
+}
+
 
 
 /* ===== RESPONSIVE - TABLET LANDSCAPE (1100px) ===== */
