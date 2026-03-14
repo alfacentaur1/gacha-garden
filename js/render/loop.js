@@ -2,6 +2,10 @@ import State from '../classes/State.js';
 import weatherConfig from '../config/weatherConfig.js';
 import Toastify from 'https://cdn.skypack.dev/toastify-js';
 import { renderGame } from './game.js';
+import FieldsState from '../classes/FieldsState.js';
+
+const state = State.instance;
+const fieldState = FieldsState.instance;
 
 
 export default function gameLoopRun() {
@@ -9,21 +13,28 @@ export default function gameLoopRun() {
 
 
 function gameLoop() {
-    const state = State.instance;
     const now = Date.now();
-    //update tick for plants
-    ['plot1', 'plot2'].forEach(plot => {
-        state.game[plot].plants.forEach(plant => {
-            if (!plant.isReady) {
-                plant.growTime -= 1*state.weather.growthModifier; //weather affects growth time
-                if (plant.growTime <= 0) {
+    ['field1', 'field2'].forEach((fieldKey, fId) => {
+        fieldState[fieldKey].forEach((plant, pId) => {
+            if(plant && plant.isReady && plant.progress !== 100){
+                plant.progress = 100;
+                reloadCanvas(fId, pId, plant.progress);
+            }
+            if (plant && !plant.isReady) {
+                const multiplier = state.weather.multiplier || 1;
+                const elapsed = now - plant.plantedAt;
+                const totalTime = (plant.growTime * 1000) / multiplier;
+                
+                plant.progress = Math.min(elapsed / totalTime, 1);
+
+                if (plant.progress >= 1) {
                     plant.isReady = true;
                 }
+                reloadCanvas(fId, pId, plant.progress);
             }
         });
-    }
-);
-    weatherChangeLoop()
+    });
+    weatherChangeLoop();
 }
 
 function weatherChangeLoop() {
@@ -68,4 +79,15 @@ Toastify({
     }
     }
 }
+}
+export function reloadCanvas(fId, pId, progress) {
+    const canvas = document.getElementById(`canvas-f${fId}-p${pId}`);
+    if (!canvas) return;
+
+    const ctx = canvas.getContext('2d');
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.fillStyle = 'rgba(255, 255, 255, 0.4)';
+    const fillHeight = canvas.height * progress;
+    
+    ctx.fillRect(0, canvas.height - fillHeight, canvas.width, fillHeight);
 }
