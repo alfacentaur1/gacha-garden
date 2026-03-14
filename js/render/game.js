@@ -3,6 +3,7 @@ import { PACKS_CONFIG } from '../config/packsConfig.js';
 import Toastify from 'https://cdn.skypack.dev/toastify-js';
 import FieldsState from '../classes/FieldsState.js';
 import Pack from '../classes/Pack.js';
+import {reloadCanvas} from './loop.js';
 
 export function renderGame(container) {
     const state = State.instance;
@@ -72,6 +73,7 @@ function createDashboard(state) {
     traderItem.addEventListener('click', () => {
         if(state.user.money >= 1500) {
             state.user.money -= 1500;
+            console.log('Bought watering can, remaining money:', state.user.money);
             //media
             const coinSound = new Audio('../media/coins.mp3');
             coinSound.play();
@@ -79,6 +81,7 @@ function createDashboard(state) {
             console.log('Bought watering can, total:', state.user.inventory.itemInventory.wateringCan);
             //render only watering can count, to prevent full re-render
             renderCanCount();
+            renderMoney();
         } else {
             Toastify({
                 text: "Not enough money for watering can!",
@@ -252,26 +255,40 @@ function addDragoverListeners(container) {
 
 function renderPlotsWithPlants() {
     const fieldState = FieldsState.instance;
-    fieldState.field1.forEach((plant, index) => {
-        const plot = document.querySelectorAll('.field')[0].querySelectorAll('.plot')[index];
-        if (plant) {
-            plot.innerHTML = `<img src="${plant.image}" alt="${plant.name}" class="plant-image">`;
-        } else {
-            plot.innerHTML = '';
-        }
-    });
-    fieldState.field2.forEach((plant, index) => {
-        const plot = document.querySelectorAll('.field')[1].querySelectorAll('.plot')[index];
-        if (plant) {
-            plot.innerHTML = `<img src="${plant.image}" alt="${plant.name}" class="plant-image">`;
-        }
-        else {
-            plot.innerHTML = '';
-        }
-    });
+    const fieldElements = document.querySelectorAll('.field');
 
+    [fieldState.field1, fieldState.field2].forEach((plants, fieldIndex) => {
+        const plots = fieldElements[fieldIndex].querySelectorAll('.plot');
+        
+        plants.forEach((plant, plotIndex) => {
+            const plot = plots[plotIndex];
+
+
+            if (plant) {
+                let img = plot.querySelector('.plant-image');
+                if (!img) {
+                    img = document.createElement('img');
+                    img.classList.add('plant-image');
+                    plot.appendChild(img);
+                }
+                img.src = plant.image;
+                if (!plot.querySelector('canvas')) {
+                    const canvas = document.createElement('canvas');
+                    canvas.classList.add('progress-canvas');
+                    canvas.id = `canvas-f${fieldIndex}-p${plotIndex}`;
+                
+                    canvas.width = plot.clientWidth || 100;
+                    canvas.height = plot.clientHeight || 100;
+                    
+                    plot.appendChild(canvas);
+                }
+                reloadCanvas(fieldIndex, plotIndex, plant.progress);
+            } else {
+                plot.innerHTML = '';
+            }
+        });
+    });
 }
-
 function addDropListeners(container) {
     container.addEventListener('drop', (e) => {
         e.preventDefault();
@@ -291,13 +308,12 @@ function addDropListeners(container) {
             if (state.user.inventory.itemInventory.wateringCan > 0) {
                 state.user.inventory.itemInventory.wateringCan -= 1;
                 targetField.forEach(plant => {
-                    if(plant) {
+                    if (plant) {
                         plant.isReady = true;
                     }
                 });
                 renderCanCount();
                 renderPlotsWithPlants();
-                
 
             } else {
                 Toastify({ 
@@ -340,13 +356,7 @@ function addDropListeners(container) {
                         const wonPlant = pack.openPack();
 
                         if (wonPlant) {
-                            targetField[i] = {
-                                name: wonPlant.name,
-                                growTime: wonPlant.growTime, 
-                                price: wonPlant.price,
-                                image: wonPlant.image      
-                            };
-                            
+                            targetField[i] = wonPlant;
                             console.log(`Planted: ${wonPlant.name}`);
                         }
                         break; 
@@ -372,5 +382,16 @@ function renderSeedsCount() {
             seedEl.querySelector('.seed-count').textContent = count;
         }
     });
+}
+
+function addCollectListeners() {
+    const mainPage = document.getElementById('page-game');
+}
+
+function renderMoney() {
+    const moneyEl = document.querySelector('.stat-item');
+    if (moneyEl) {
+        moneyEl.textContent = `Money: $${State.instance.user.money}`;
+    }
 }
 

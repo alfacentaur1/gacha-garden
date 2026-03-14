@@ -172,24 +172,6 @@ header {
     min-height: 0;
     justify-content: center;
 }
-.plant-image {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;     
-    image-rendering: pixelated; 
-    display: block;
-    margin: 0 auto;
-}
-
-.plot {
-    background: #3a6b30;
-    border: 1px solid #2d5425;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    overflow: hidden; 
-    padding: 5px;
-}
 
 .field {
     width: 100%;
@@ -207,6 +189,31 @@ header {
 .plot {
     background: #3a6b30;
     border: 1px solid #2d5425;
+    position: relative; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.plant-image {
+    position: absolute; 
+    width: 80%; 
+    height: 80%;
+    object-fit: contain;     
+    image-rendering: pixelated; 
+    z-index: 1; 
+    pointer-events: none; 
+}
+
+.progress-canvas {
+    position: absolute; 
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2; 
+    pointer-events: none; 
 }
 
 /* ===== RIGHT COLUMN ===== */
@@ -556,6 +563,7 @@ input {
         order: 10; 
         margin-top: 10px;
     }
+}
     
 
 /* ===== RESPONSIVE - TABLET PORTRAIT (850px) ===== */
