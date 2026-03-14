@@ -4,6 +4,7 @@ import Toastify from 'https://cdn.skypack.dev/toastify-js';
 import FieldsState from '../classes/FieldsState.js';
 import Pack from '../classes/Pack.js';
 import {reloadCanvas} from './loop.js';
+import triggerRainEffect from './rain.js';
 
 export function renderGame(container) {
     const state = State.instance;
@@ -120,6 +121,11 @@ function createFields() {
         const field = document.createElement('article');
         field.classList.add('field');
         field.dataset.fieldIndex = i; 
+
+        const rainSvg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+        rainSvg.classList.add('rain-layer');
+        rainSvg.setAttribute('id', `rain-svg-${i}`);
+        field.appendChild(rainSvg);
         
         for (let j = 0; j < 9; j++) {
             const plot = document.createElement('div');
@@ -323,6 +329,7 @@ function addDropListeners(container) {
                         plant.isReady = true;
                     }
                 });
+                triggerRainEffect(fieldId);
                 renderCanCount();
                 renderPlotsWithPlants();
 
@@ -398,6 +405,7 @@ function renderSeedsCount() {
 function addCollectListeners() {
     const mainPage = document.getElementById('page-game');
     mainPage.addEventListener('click', (e) => {
+        const media = new Audio('../media/sell.mp3');
         const plot = e.target.closest('.plot');
         if (!plot) return;
         const fieldId = parseInt(plot.closest('.field').dataset.fieldIndex);
@@ -406,6 +414,7 @@ function addCollectListeners() {
         const plant = (fieldId === 0) ? fieldState.field1[plotId] : fieldState.field2[plotId];
         if (plant && plant.isReady) {
             const state = State.instance;
+            media.play();
             state.user.money += plant.price;
             state.user.moneyMade += plant.price;
             if (fieldId === 0) {
