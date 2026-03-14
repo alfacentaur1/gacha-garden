@@ -1,18 +1,32 @@
+import Plant from './Plant.js'; 
+
 export default class Pack {
-    constructor(name, price, plants){
+    constructor(name, price, loot) { 
         this.name = name;
         this.price = price;
-        this.plants = plants;
+    
+        this.loot = loot; 
     }
     //distribution function
     openPack() {
-        const totalChance = this.plants.reduce((sum, plant) => sum + plant.chance, 0);
+        if (!this.loot || this.loot.length === 0) return null;
+
+        const totalChance = this.loot.reduce((sum, item) => sum + item.chance, 0);
         const randomChance = Math.random() * totalChance;
         let cumulativeChance = 0;
-        for (const plant of this.plants) {
-            cumulativeChance += plant.chance;
+
+        for (const item of this.loot) {
+            cumulativeChance += item.chance;
             if (randomChance < cumulativeChance) {
-                return plant.plant;
-            }   
-    }}
+                const p = item.plant;
+                return new Plant(
+                    p.name, 
+                    p.growthTime, 
+                    p.sellPrice, 
+                    p.image
+                );
+            }
+        }
+        return null;
+    }
 }

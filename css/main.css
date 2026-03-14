@@ -172,6 +172,24 @@ header {
     min-height: 0;
     justify-content: center;
 }
+.plant-image {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;     
+    image-rendering: pixelated; 
+    display: block;
+    margin: 0 auto;
+}
+
+.plot {
+    background: #3a6b30;
+    border: 1px solid #2d5425;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden; 
+    padding: 5px;
+}
 
 .field {
     width: 100%;

@@ -1,29 +1,19 @@
 export default class Plant {
-    //private 
-    _slotID = null; 
-    _fieldID = null; 
-
-    constructor(name, growthTime, price) {
+    constructor(name, growthTime, price, image) {
         this.name = name;
-        this.growthTime = growthTime;
+        this.growTime = growthTime; 
         this.price = price;
+        this.image = image; 
+        
         this.plantedAt = Date.now();
         this.isReady = false;
+        this._slotID = null;
+        this._fieldID = null;
     }
 
-    set slotID(id) {
-        this._slotID = id;
-    }
+    set slotID(id) { this._slotID = id; }
+    get slotID() { return this._slotID; }
 
-    get slotID() {
-        return this._slotID;
-    }
-
-    set fieldID(id) {
-        this._fieldID = id;
-    }   
-
-    get fieldID() {
-        return this._fieldID;
-    }
+    set fieldID(id) { this._fieldID = id; }   
+    get fieldID() { return this._fieldID; }
 }
