@@ -57,7 +57,7 @@ function getPlantImageHTML(name) {
     
     const filename = plantImages[name] ;
     
-    const imagePath = `img/${filename}`;
+    const imagePath = `../img/${filename}`;
     
     return `<img src="${imagePath}" alt="${name}" class="lexicon-image" />`;
 }
