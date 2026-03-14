@@ -290,7 +290,7 @@ function addDropListeners(container) {
             //immediately make all plants ready
             if (state.user.inventory.itemInventory.wateringCan > 0) {
                 state.user.inventory.itemInventory.wateringCan -= 1;
-                targetField.foreach(plant => {
+                targetField.forEach(plant => {
                     if(plant) {
                         plant.isReady = true;
                     }
@@ -300,7 +300,28 @@ function addDropListeners(container) {
                 
 
             } else {
-                Toastify({ text: "No water left!" }).showToast();
+                Toastify({ 
+                    text: "No water left!" ,
+                    duration: 3000,
+                    gravity: "top",
+                    position: "center",
+                    stopOnFocus: true,
+                    style: {
+                        position: "fixed",
+                        zIndex: "9999",
+                        top: "20px",
+                        background: "#a09880",
+                        border: "2px solid #7c3f3f",
+                        boxShadow: "0 4px 0 #7c3f3f",
+                        fontFamily: "'Lato', sans-serif",
+                        fontSize: "0.8rem",
+                        borderRadius: "0px",
+                        color: "#ede8e0",
+                        textAlign: "center",
+                        minWidth: "200px"
+                    }
+
+                }).showToast();
             }
         } 
         

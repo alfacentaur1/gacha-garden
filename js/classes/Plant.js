@@ -7,13 +7,6 @@ export default class Plant {
         
         this.plantedAt = Date.now();
         this.isReady = false;
-        this._slotID = null;
-        this._fieldID = null;
     }
 
-    set slotID(id) { this._slotID = id; }
-    get slotID() { return this._slotID; }
-
-    set fieldID(id) { this._fieldID = id; }   
-    get fieldID() { return this._fieldID; }
 }
