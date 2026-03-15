@@ -1,7 +1,35 @@
 # gacha-garden
 
 Cílem projektu je vytvořit hru podobnou klasickým gacha hrám propojenou s farm planting simulátorem. Hráč má k dispozici přehled dostupných rostlinek s potřebnými informacemi. Hráč nakupuje balíčky, které mají rozdílnou distribuci rostlinek, tzn. každý balíček má jiný obsah s jinými pravděpodobnostmi. Cílem je si vydělat na víc rostlinek, využívat změny počasí a dostupných tools.
+Aby tvá zahrada vzkvétala a peněženka se plnila, postupuj podle těchto kroků:
 
+### 1. Nákup semínek
+* Kliknutím na tlačítko **"Seed Shop and Lexicon"** na hlavním panelu se přesuň do obchodu.
+* Vyber si jeden z balíčků (např. Starter, Green, Exotic) a klikni na **"Buy"**. Každý balíček obsahuje různé rostliny s odlišnou pravděpodobností získání.
+* Po nákupu se tlačítkem **"Back"** vrať na hlavní obrazovku.
+
+### 2. Sázení a pěstování
+* V pravém sloupci v sekci **"SEEDS"** uvidíš své zakoupené balíčky a jejich počet.
+* Pomocí **Drag & Drop** (přetažením myší) vezmi balíček a pusť ho na libovolné volné políčko v zahradě. Tím dojde k rozbalení a zasazení náhodné rostlinky.
+* Růst rostliny můžeš sledovat pomocí vizuálního ukazatele (překrytí políčka), který se postupně naplňuje.
+
+### 3. Vliv počasí
+* Sleduj sekci **"Weather forecast"**. Aktuální počasí výrazně ovlivňuje rychlost růstu.
+* **Rainy (Deštivo)**: Rostliny rostou o 50 % rychleji.
+* **Sunny (Slunečno)**: Rostliny rostou o 20 % rychleji.
+* **Storm (Bouřka)**: Růst je o 10 % pomalejší.
+
+### 4. Sklizeň a výdělek
+* Jakmile ukazatel růstu zmizí a rostlina je plně zobrazena, je připravena ke sklizni.
+* **Kliknutím na dospělou rostlinu** ji sklidíš a okamžitě získáš peníze podle její prodejní ceny.
+* Pokud potřebuješ peníze rychleji, můžeš využít **Lemonade Stand** (stánek s limonádou) v levém panelu – každé kliknutí ti vydělá $1.
+
+### 5. Používání nástrojů
+* V obchodě u Tradera si můžeš koupit **Watering Can** (konvičku) za $1500.
+* Přetažením konvičky na pole dojde k okamžitému dozrání všech zasazených rostlin na daném poli.
+
+### 6. Lexicon
+* V Lexiconu si můžeš prohlédnout seznam všech rostlin, jejich vzácnost (Common až Legendary), dobu růstu a prodejní cenu.
 ## Přehled splněných požadavků
 
 ### 1. Dokumentace 
