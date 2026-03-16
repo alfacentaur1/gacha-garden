@@ -38,7 +38,7 @@ export default function triggerRainEffect(fieldId) {
         line.appendChild(anim);
         svg.appendChild(line);
     }
-
+    //after 1.2 seconds, stop the sound and clear the raindrops
     setTimeout(() => {
         media.pause();
         media.currentTime = 0;

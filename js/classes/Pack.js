@@ -10,11 +10,12 @@ export default class Pack {
     //distribution function
     openPack() {
         if (!this.loot || this.loot.length === 0) return null;
-
+        //calculate total chance
         const totalChance = this.loot.reduce((sum, item) => sum + item.chance, 0);
         const randomChance = Math.random() * totalChance;
         let cumulativeChance = 0;
 
+        //distribution function 
         for (const item of this.loot) {
             cumulativeChance += item.chance;
             if (randomChance < cumulativeChance) {

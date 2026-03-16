@@ -5,7 +5,7 @@ export default class FieldsState {
         if (FieldsState._instance) {
             return FieldsState._instance;
         }
-
+        //init fields with null
         this.field1 = new Array(9).fill(null);
         this.field2 = new Array(9).fill(null);
         
