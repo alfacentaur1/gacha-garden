@@ -2,9 +2,10 @@ import { PLANTS_CONFIG } from '../config/plantsConfig.js';
 
 export default async function getBestPlantsForLocation() {
     if (!navigator.geolocation) {
+        //if user denies geolocation, return default plants
         return [PLANTS_CONFIG.WHEAT, PLANTS_CONFIG.TOMATO];
     }
-
+    //else return promise with plants based on latitude
     return new Promise((resolve, reject) => {
         navigator.geolocation.getCurrentPosition(
             position => {
