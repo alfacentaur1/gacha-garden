@@ -14,7 +14,7 @@ export async function renderGame(container) {
     const mainPage = document.createElement('main');
     mainPage.classList.add('layout');
     mainPage.id = 'page-game';
-    const dashboard = await createDashboard(state, container);
+    const dashboard = createDashboard(state, container);
 
     mainPage.appendChild(dashboard);
     mainPage.appendChild(createFields(state));
@@ -30,14 +30,11 @@ export async function renderGame(container) {
     addCollectListeners();
 }
 
-async function createDashboard(state) { 
+function createDashboard(state) { 
     const aside = document.createElement('aside');
     aside.classList.add('dashboard');
     let sanitizedName = sanitize(state.user.name);
-    const bestPlants = await getBestPlantsForLocation().catch(() => [
-        { name: "Wheat" }, 
-        { name: "Tomato" }
-    ]);
+
     aside.innerHTML = `
         <p> ${sanitizedName}'s electronic diary</p>
         <section class="statistics">
@@ -52,7 +49,7 @@ async function createDashboard(state) {
         <section class="location">
             <p>Best plants for your area:</p>
             <ul class="best-plants">
-                ${bestPlants.map(plant => `<li>${plant.name}</li>`).join('')}
+                <li>Searching for location...</li>
             </ul>
         </section>
         <section class="trader">
@@ -70,6 +67,21 @@ async function createDashboard(state) {
             <source src="./media/knight.mp4" type="video/mp4">
         </video>
     `;
+
+    getBestPlantsForLocation()
+        .then(bestPlants => {
+            const list = aside.querySelector('.best-plants');
+            if (list) {
+                list.innerHTML = bestPlants.map(plant => `<li>${plant.name}</li>`).join('');
+            }
+        })
+        .catch(() => {
+            const list = aside.querySelector('.best-plants');
+            if (list) {
+                list.innerHTML = `<li>Wheat</li><li>Tomato</li>`;
+            }
+        });
+
     aside.querySelector('.lemonstand').addEventListener('click', () => {
         state.user.money += 1;
         state.user.moneyMade += 1;

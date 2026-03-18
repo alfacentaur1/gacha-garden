@@ -17,7 +17,7 @@ export default async function getBestPlantsForLocation() {
                 } else if (absoluteLat > 25) {
                     resolve([PLANTS_CONFIG.TOMATO, PLANTS_CONFIG.SUNFLOWER, PLANTS_CONFIG.PEPPER]);
                 } else {
-                    resolve([PLANTS_CONFIG.BANANA, PLANTS_CONFIG.ORANGE, PLANTS_CONFIG.PALM]);
+                    resolve([PLANTS_CONFIG.BANANA, PLANTS_CONFIG.ORANGE]);
                 }
             },
             error => {
