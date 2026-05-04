@@ -108,5 +108,28 @@ window.addEventListener("online", () => {
         }
     }).showToast();
 });
+document.addEventListener('header-info', (e) => {
+    Toastify({
+        text: "Garden Gacha Game\nVersion 1.0\nGrow your garden and collect rare plants!",
+        duration: 5000,
+        gravity: "top",
+        position: "center",
+        escapeMarkup: false, 
+        style: {
+            position: "fixed",
+            zIndex: "9999",
+            top: "80px", 
+            background: "#4a7c3f",
+            color: "#fff",
+            fontFamily: "'Lato', sans-serif",
+            fontSize: "0.9rem",
+            border: "2px solid #3a6b30",
+            boxShadow: "0 4px 6px rgba(0,0,0,0.2)",
+            textAlign: "center",
+            minWidth: "250px",
+            lineHeight: "1.5"
+        }
+    }).showToast();
+});
 
 loop();

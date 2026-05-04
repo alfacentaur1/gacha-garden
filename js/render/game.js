@@ -255,6 +255,7 @@ function createRightBottom(state, container) {
 
     return div;
 }
+
 function renderName(container) {
     const nameDisplay = container.querySelector('.dashboard p');
     if (nameDisplay) {
