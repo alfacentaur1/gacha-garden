@@ -363,6 +363,18 @@ header {
     text-transform: uppercase;
 }
 
+.input-section h2 {
+    font-size: var(--font-size-lg);
+    margin-bottom: var(--gap-md);
+    font: var(--font-main);
+}
+
+.tools h2 {
+    font-size: var(--font-size-lg);
+    margin-bottom: var(--gap-md);
+    font: var(--font-main);
+}
+
 aside h2 {
     font-size: var(--font-size-lg);
     margin-bottom: var(--gap-md);

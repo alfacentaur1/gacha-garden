@@ -205,25 +205,41 @@ function createRightBottom(state, container) {
     const div = document.createElement('div');
     div.classList.add('right-bottom');
     let wateringCount = state.user.inventory.itemInventory.wateringCan;
+    
     div.innerHTML = `
         <section class="tools">
-            <p>Tools</p>
+            <h2>Tools</h2>
             <div class="tools-container">
-                ${'<img src="img/watering_can.png" alt="tool" class="tool" draggable="true">' }
+                <img src="img/watering_can.png" alt="tool" class="tool" draggable="true">
                 <span class="tool-badge">free to use: ${wateringCount}</span>
             </div>
         </section>
-        <section class="input-section">
-            <p>What's your name, gardener?</p>
-            <input type="text" id="name-input" placeholder="Hmmm...">
+        
+
+        <form class="input-section" id="name-form">
+            <h2>What's your name, gardener?</h2>
+            
+            <input 
+                type="text" 
+                id="name-input" 
+                name="username" 
+                placeholder="Hmmm..." 
+                required 
+                maxlength="20"
+                autocomplete="off"
+            >
+            
             <div id="name-buttons">
-                <button class="save-name">Save</button>
-                <button class="clear-name">Clear</button>
+                <button type="submit" class="save-name">Save</button>
+                <button type="button" class="clear-name">Clear</button>
             </div>
-        </section>
+        </form>
     `;
 
-    div.querySelector('.save-name').addEventListener('click', () => {
+    const nameForm = div.querySelector('#name-form');
+    nameForm.addEventListener('submit', (e) => {
+        e.preventDefault(); 
+        
         const input = div.querySelector('#name-input');
         if (input.value.trim() !== "") {
             state.user.name = input.value;
@@ -235,13 +251,10 @@ function createRightBottom(state, container) {
         state.user.name = 'Player';
         renderName(container);
         div.querySelector('#name-input').value = '';
-    }
-    );
-
+    });
 
     return div;
 }
-
 function renderName(container) {
     const nameDisplay = container.querySelector('.dashboard p');
     if (nameDisplay) {
