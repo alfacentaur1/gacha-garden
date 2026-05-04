@@ -11,7 +11,7 @@ export async function renderGame(container) {
     const state = State.instance;
     container.innerHTML = '';
 
-    const mainPage = document.createElement('main');
+    const mainPage = document.createElement('div');
     mainPage.classList.add('layout');
     mainPage.id = 'page-game';
     const dashboard = createDashboard(state, container);
@@ -38,7 +38,7 @@ function createDashboard(state) {
     aside.innerHTML = `
         <p> ${sanitizedName}'s electronic diary</p>
         <section class="statistics">
-            <p>Statistics</p>
+            <h2>Statistics</h2>
             <div class="stat-item">Money: $${state.user.money}</div>
             <div class="stat-item">Lemonade sold: ${state.user.lemonadeSold}</div>
             <div class="stat-item">Money made: $${state.user.moneyMade}</div>
@@ -47,13 +47,13 @@ function createDashboard(state) {
             <p>seed shop and lexicon</p>
         </nav>
         <section class="location">
-            <p>Best plants for your area:</p>
+            <h2>Best plants for your area:</h2>
             <ul class="best-plants">
                 <li>Searching for location...</li>
             </ul>
         </section>
         <section class="trader">
-            <p>trader</p>
+            <h2>Trader</h2>
             <p>watering can - $1500</p>
             <div class="trader-container">
                 <img src="img/watering_can.png" alt="trader item" class="trader-item" draggable="false">
@@ -182,7 +182,7 @@ function createSeeds(state) {
 
         return `
             <div class="seed">
-            <p id="seed-name">${pack.name}</p>
+            <p class="seed-name">${pack.name}</p>
                 <div class="seed-pack-image">
                     <img src="${pack.icon}" alt="${pack.name}" class="seed-icon" draggable="true">
                 </div>
@@ -411,7 +411,7 @@ function renderSeedsCount() {
     const seedElements = document.querySelectorAll('.seed');
     
     seedElements.forEach(seedEl => {
-        const name = seedEl.querySelector('#seed-name').textContent;
+        const name = seedEl.querySelector('.seed-name').textContent;
         const pack = Object.values(PACKS_CONFIG).find(p => p.name === name);
         if (pack) {
             const count = state.user.inventory.seedInventory[pack.id];

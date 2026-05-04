@@ -363,6 +363,12 @@ header {
     text-transform: uppercase;
 }
 
+aside h2 {
+    font-size: var(--font-size-lg);
+    margin-bottom: var(--gap-md);
+    font: var(--font-main);
+}
+
 /* nested css */
 .seeds {
     grid-column: 3;
