@@ -4,7 +4,7 @@ import Toastify from 'https://cdn.skypack.dev/toastify-js';
 
 export function renderShop(container) {
     container.innerHTML = `
-        <main id="page-shop">
+        <div id="page-shop">
             <header class="shop-header">
                 <button class="back-btn">Back</button>
                 <nav class="shop-tabs">
@@ -13,7 +13,7 @@ export function renderShop(container) {
                 </nav>
             </header>
             <section class="packs-grid"></section>
-        </main>
+        </div>
     `;
     
     const grid = container.querySelector('.packs-grid');
@@ -62,7 +62,7 @@ function createPackCard(pack) {
 
     article.innerHTML = `
         <img src="${pack.icon}" alt="${pack.name}" class="pack-icon">
-        <h3 class="pack-name">${pack.name}</h3>
+        <h2 class="pack-name">${pack.name}</h2>
         <ul class="pack-chances">
             ${chancesHTML}
         </ul>

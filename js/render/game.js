@@ -11,7 +11,7 @@ export async function renderGame(container) {
     const state = State.instance;
     container.innerHTML = '';
 
-    const mainPage = document.createElement('main');
+    const mainPage = document.createElement('div');
     mainPage.classList.add('layout');
     mainPage.id = 'page-game';
     const dashboard = createDashboard(state, container);
@@ -38,7 +38,7 @@ function createDashboard(state) {
     aside.innerHTML = `
         <p> ${sanitizedName}'s electronic diary</p>
         <section class="statistics">
-            <p>Statistics</p>
+            <h2>Statistics</h2>
             <div class="stat-item">Money: $${state.user.money}</div>
             <div class="stat-item">Lemonade sold: ${state.user.lemonadeSold}</div>
             <div class="stat-item">Money made: $${state.user.moneyMade}</div>
@@ -47,13 +47,13 @@ function createDashboard(state) {
             <p>seed shop and lexicon</p>
         </nav>
         <section class="location">
-            <p>Best plants for your area:</p>
+            <h2>Best plants for your area:</h2>
             <ul class="best-plants">
                 <li>Searching for location...</li>
             </ul>
         </section>
         <section class="trader">
-            <p>trader</p>
+            <h2>Trader</h2>
             <p>watering can - $1500</p>
             <div class="trader-container">
                 <img src="img/watering_can.png" alt="trader item" class="trader-item" draggable="false">
@@ -182,7 +182,7 @@ function createSeeds(state) {
 
         return `
             <div class="seed">
-            <p id="seed-name">${pack.name}</p>
+            <p class="seed-name">${pack.name}</p>
                 <div class="seed-pack-image">
                     <img src="${pack.icon}" alt="${pack.name}" class="seed-icon" draggable="true">
                 </div>
@@ -205,25 +205,41 @@ function createRightBottom(state, container) {
     const div = document.createElement('div');
     div.classList.add('right-bottom');
     let wateringCount = state.user.inventory.itemInventory.wateringCan;
+    
     div.innerHTML = `
         <section class="tools">
-            <p>Tools</p>
+            <h2>Tools</h2>
             <div class="tools-container">
-                ${'<img src="img/watering_can.png" alt="tool" class="tool" draggable="true">' }
+                <img src="img/watering_can.png" alt="tool" class="tool" draggable="true">
                 <span class="tool-badge">free to use: ${wateringCount}</span>
             </div>
         </section>
-        <section class="input-section">
-            <p>What's your name, gardener?</p>
-            <input type="text" id="name-input" placeholder="Hmmm...">
+        
+
+        <form class="input-section" id="name-form">
+            <h2>What's your name, gardener?</h2>
+            
+            <input 
+                type="text" 
+                id="name-input" 
+                name="username" 
+                placeholder="Hmmm..." 
+                required 
+                maxlength="20"
+                autocomplete="off"
+            >
+            
             <div id="name-buttons">
-                <button class="save-name">Save</button>
-                <button class="clear-name">Clear</button>
+                <button type="submit" class="save-name">Save</button>
+                <button type="button" class="clear-name">Clear</button>
             </div>
-        </section>
+        </form>
     `;
 
-    div.querySelector('.save-name').addEventListener('click', () => {
+    const nameForm = div.querySelector('#name-form');
+    nameForm.addEventListener('submit', (e) => {
+        e.preventDefault(); 
+        
         const input = div.querySelector('#name-input');
         if (input.value.trim() !== "") {
             state.user.name = input.value;
@@ -235,9 +251,7 @@ function createRightBottom(state, container) {
         state.user.name = 'Player';
         renderName(container);
         div.querySelector('#name-input').value = '';
-    }
-    );
-
+    });
 
     return div;
 }
@@ -411,7 +425,7 @@ function renderSeedsCount() {
     const seedElements = document.querySelectorAll('.seed');
     
     seedElements.forEach(seedEl => {
-        const name = seedEl.querySelector('#seed-name').textContent;
+        const name = seedEl.querySelector('.seed-name').textContent;
         const pack = Object.values(PACKS_CONFIG).find(p => p.name === name);
         if (pack) {
             const count = state.user.inventory.seedInventory[pack.id];
