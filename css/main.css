@@ -368,9 +368,22 @@ header {
     font: var(--font-main);
 }
 
+section h2 {
+    font-size: var(--font-size-base) !important;
+    margin:auto !important;
+    font: var(--font-main) !important;
+
+}
+
+.tools{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
 .tools h2 {
     font-size: var(--font-size-lg);
-    margin-bottom: var(--gap-md);
     font: var(--font-main);
 }
 
