@@ -38,7 +38,7 @@ function createDashboard(state) {
     aside.innerHTML = `
         <p> ${sanitizedName}'s electronic diary</p>
         <section class="statistics">
-            <h2>Statistics</h2>
+            <p>Statistics</p>
             <div class="stat-item">Money: $${state.user.money}</div>
             <div class="stat-item">Lemonade sold: ${state.user.lemonadeSold}</div>
             <div class="stat-item">Money made: $${state.user.moneyMade}</div>
@@ -47,13 +47,13 @@ function createDashboard(state) {
             <p>seed shop and lexicon</p>
         </nav>
         <section class="location">
-            <h2>Best plants for your area:</h2>
+            <p>Best plants for your area:</p>
             <ul class="best-plants">
                 <li>Searching for location...</li>
             </ul>
         </section>
         <section class="trader">
-            <h2>Trader</h2>
+            <p>Trader</p>
             <p>watering can - $1500</p>
             <div class="trader-container">
                 <img src="img/watering_can.png" alt="trader item" class="trader-item" draggable="false">
@@ -208,7 +208,7 @@ function createRightBottom(state, container) {
     
     div.innerHTML = `
         <section class="tools">
-            <h2>Tools</h2>
+            <p>Tools</p>
             <div class="tools-container">
                 <img src="img/watering_can.png" alt="tool" class="tool" draggable="true">
                 <span class="tool-badge">free to use: ${wateringCount}</span>
@@ -217,7 +217,7 @@ function createRightBottom(state, container) {
         
 
         <form class="input-section" id="name-form">
-            <h2>What's your name, gardener?</h2>
+            <p>What's your name, gardener?</p>
             
             <input 
                 type="text" 
